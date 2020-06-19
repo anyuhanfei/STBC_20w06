@@ -1,0 +1,85 @@
+{extend name="base" /}
+
+{block name="content"}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">C2C管理</div>
+                        <div class="card-sub text-warning">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-inline" role="form" action="" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="buy_phone" id="buy_phone" value="{$buy_phone}" placeholder="买家会员手机号" style="width: 150px;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="sell_phone" id="sell_phone" value="{$sell_phone}" placeholder="卖家会员手机号" style="width: 150px;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="deal_id" id="deal_id" value="{$deal_id}" placeholder="交易单号" style="width: 150px;">
+                            </div>
+                            <button type="submit" class="btn btn-default" id="search_submit">搜索</button>&nbsp&nbsp
+                            <button type="button" class="btn btn-default" id="from_close">清空</button>
+                        </form>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="4%">#</th>
+                                    <th scope="col" width="6%">买家手机号</th>
+                                    <th scope="col" width="6%">卖家手机号</th>
+                                    <th scope="col" width="10%">金额</th>
+                                    <th scope="col" width="11%">单价</th>
+                                    <th scope="col" width="5%">状态</th>
+                                    <th scope="col" width="11%">挂卖时间</th>
+                                    <th scope="col" width="11%">操作时间</th>
+                                    <th scope="col" width="6%">支付类型</th>
+                                    <th scope="col" width="6%">充值凭证</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.buyuser->phone}</td>
+                                    <td>{$vo->selluser->phone}</td>
+                                    <td>{$vo->amount}</td>
+                                    <td>{$vo->unit_price}</td>
+                                    <td>{$vo.status_text}</td>
+                                    <td>{$vo.insert_time}</td>
+                                    <td>{$vo.operation_time}</td>
+                                    <td>{$vo.pay_type}</td>
+                                    <td>
+                                        <img id="image{$vo.deal_id}" src="{$vo.pay_prove}" width="60px" height="60px" onclick="show_image('{$vo.deal_id}')"/>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                        {$list->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="custom_js"}
+<script>
+
+    $("#from_close").click(function(){
+        $("#buy_phone").val('');
+        $("#sell_phone").val('');
+        $("#deal_id").val('');
+        $("#search_submit").click();
+    })
+</script>
+{/block}

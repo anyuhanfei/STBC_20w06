@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\facade\View;
 use think\facade\Session;
 use think\facade\Request;
+use think\facade\Db;
 
 use app\admin\controller\Admin;
 
@@ -12,6 +13,9 @@ use app\admin\model\IdxUserCount;
 use app\admin\model\IdxUserFund;
 use app\admin\model\IdxUserData;
 use app\admin\model\LogAdminOperation;
+use app\admin\model\LogRecharge;
+use app\admin\model\LogWithdraw;
+use app\admin\model\LogUserFund;
 
 
 class User extends Admin{
@@ -299,6 +303,99 @@ class User extends Admin{
             return return_data(1, '', '充值成功');
         }else{
             return return_data(3, '', '充值失败,请联系管理员');
+        }
+    }
+
+    /**
+     * 充值信息管理-列表
+     *
+     * @return void
+     */
+    public function recharge(){
+        $user_account = Request::instance()->param('user_account', '');
+        $obj = new LogRecharge;
+        $user_id = IdxUser::where('phone', $user_account)->value('user_id');
+        $obj = ($user_id != '') ? $obj->where('user_id', $user_id) : $obj;
+        $list = $obj->order('status asc, recharge_id desc')->paginate($this->page_number, false,['query'=>request()->param()]);
+        $this->many_assign(['list'=> $list, 'user_account'=> $user_account]);
+        return View::fetch();
+    }
+
+    /**
+     * 充值信息审核提交
+     *
+     * @param [type] $recharge_id
+     * @return void
+     */
+    public function recharge_submit($id){
+        $status = Request::instance()->param('status', 0);
+        if($status != 1 && $status != 2){
+            return return_data(2, '', '非法操作');
+        }
+        $recharge = LogRecharge::get($id);
+        if(!$recharge){
+            return return_data(2, '', '非法操作');
+        }
+        Db::startTrans();
+        $recharge->status = $status;
+        $recharge->operation_time = date("Y-m-d H:i:s", time());
+        $res_one = $recharge->save();
+        $res_two = true;
+        if($status == 1){
+            $user_fund = IdxUserFund::get($recharge->user_id);
+            $user_fund->money += $recharge->amount;
+            $res_two = $user_fund->save();
+            LogUserFund::create_data($recharge->user_id, $recharge->amount, 'money', '充值', '充值审核通过');
+        }
+        if($res_one && $res_two){
+            LogAdminOperation::create_data('审核充值信息：'.$recharge->id, 'operation');
+            Db::commit();
+            return return_data(1, '', '审核成功');
+        }else{
+            Db::rollback();
+            return return_data(3, '', '审核失败，请联系管理员');
+        }
+    }
+
+    /**
+     * 提现
+     *
+     * @return void
+     */
+    public function withdraw(){
+        $user_account = Request::instance()->param('user_account', '');
+        $obj = new LogWithdraw;
+        $user_id = IdxUser::where('phone', $user_account)->value('user_id');
+        $obj = ($user_id != '') ? $obj->where('user_id', $user_id) : $obj;
+        $list = $obj->order('status asc, id desc')->paginate($this->page_number, false,['query'=>request()->param()]);
+        $this->many_assign(['list'=> $list, 'user_account'=> $user_account]);
+        return View::fetch();
+    }
+
+    public function withdraw_submit($id){
+        $status = Request::instance()->param('status', 0);
+        $withdraw = LogWithdraw::get($id);
+        if(!$withdraw){
+            return return_data(2, '', '非法操作');
+        }
+        Db::startTrans();
+        $res_two = true;
+        $withdraw->status = $status;
+        $withdraw->operation_time = date("Y-m-d H:i:s", time());
+        $res_one = $withdraw->save();
+        if($status == 2){ //驳回
+            $user_fund = IdxUserFund::get($withdraw->user_id);
+            $user_fund->money += $withdraw->amount + $withdraw->fee;
+            $res_two = $user_fund->save();
+            LogUserFund::create_data($withdraw->user_id, $withdraw->amount, 'money', '提现', '提现审核驳回');
+        }
+        if($res_one && $res_two){
+            LogAdminOperation::create_data('审核提现信息：'.$withdraw->id, 'operation');
+            Db::commit();
+            return return_data(1, '', '审核成功');
+        }else{
+            Db::rollback();
+            return return_data(3, '', '审核失败，请联系管理员');
         }
     }
 }
