@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>互转记录</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">互转记录</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="memberBox">
+                {volist name="list" id="vo"}
+                <div class="memberList">
+                    <p>
+                        <span>{$vo.content}</span>
+                        <span>金额:{$vo.number}</span>
+                    </p>
+                    <a href="javascript:;" class="{if condition="intval($vo.content) > 0"}red{else /}green{/if}">{if condition="intval($vo.content) > 0"}转入{else /}转出{/if}</a>
+                </div>
+                {/volist}
+                <!-- <div class="memberList">
+                    <p>
+                        <span>对方手机号:12345678901</span>
+                        <span>金额:100000000.000</span>
+                    </p>
+                    <a href="javascript:;" class="green">转出</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+
+</script>
+
+</body>
+</html>

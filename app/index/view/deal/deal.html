@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>C2C</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <h1 class="mui-title">C2C</h1>
+        <a href="/index/deal/order" class="head-tit_right">我的订单</a>
+    </header>
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="/" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="/index/invest" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="/index/log" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="/index/me" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="c2cHeader">
+                <div class="left" id="deal">
+                    <h5>挂单</h5>
+                    <p>STBC买卖中心</p>
+                </div>
+                <div class="right" id="shops">
+                    <h5>成为商家</h5>
+                    <p>立即申请</p>
+                </div>
+            </div>
+            <div class="c2cBox">
+                {volist name="deal" id="vo"}
+                <div class="c2cList">
+                    <p>
+                        <span>{$vo.deal_id}</span>
+                        <a href="javascript:;" class="{$vo.color}" data-deal_id='{$vo.deal_id}' data-amount='{$vo.amount}' data-price='{$vo.unit_price}'>{$vo.text}</a>
+                    </p>
+                    <p>
+                        <span>数量: {$vo.amount}STBC</span>
+                        <span class="blue">单价:{$vo.unit_price}CNY</span>
+                    </p>
+                </div>
+                {/volist}
+                <!-- <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="green">卖</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div>
+                <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="red">买</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-backdrop c2cMengBan">
+        <div class="tankuang1">
+            <p>需扣除金额(USDT)</p>
+            <h5>{$shop_usdt}</h5>
+            <div class="funBtn">
+                <a href="javscript:;" class="cancel">取消</a>
+                <a href="javscript:;" id="shop_q">确定</a>
+            </div>
+        </div>
+        <div class="tankuang2">
+            <p>购买STBC</p>
+            <p id="alert_price">单价:</p>
+            <p id="alert_amount">币数:</p>
+            <p>
+                <span id="alert_all_price">交易金额:</span>
+                <span></span>
+            </p>
+            <div class="funBtn">
+                <a href="javscript:;" class="cancel">取消</a>
+                <a href="javscript:;" id="deal_q" data-deal_id=''>确定</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    // 取消
+    $('.cancel').click(function () {
+        $('.c2cMengBan').hide();
+        $('.tankuang1').hide();
+        $('.tankuang2').hide();
+    })
+    // 商家
+    $('#shops').click(function () {
+        if("{$user.is_shop}" == '0'){
+            $('.c2cMengBan').show();
+            $('.tankuang1').show();
+        }
+    })
+
+    $("#deal").click(function(){
+        if("{$user.is_shop}" == '0'){
+            mui.toast('请先成为商家');
+            return
+        }
+        location.href = "/index/deal/create"
+    })
+
+    // 买卖
+    $('.red ,.green').click(function () {
+        var amount = $(this).attr('data-amount')
+        var price = $(this).attr('data-price');
+        $("#alert_price").html('单价:' + amount)
+        $("#alert_amount").html('币数:' + price)
+        $("#alert_all_price").html('交易金额:' + (price * amount).toFixed(2))
+        $("#deal_q").attr('data-deal_id', $(this).attr('data-deal_id'))
+        $('.c2cMengBan').show();
+        $('.tankuang2').show();
+    })
+
+    $("#shop_q").click(function(){
+        $.ajax({
+            url: "/index/deal/shop/q",
+            type: "post",
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/deal"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+    $("#deal_q").click(function(){
+        $.ajax({
+            url: "/index/deal/ing",
+            type: "post",
+            data: {deal_id: $("#deal_q").attr('data-deal_id')},
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/deal"
+                    }, 1500);
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

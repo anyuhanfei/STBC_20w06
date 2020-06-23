@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我的订单</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">我的订单</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="orderTabe mui-segmented-control">
+                <a href="#sell" class="mui-control-item mui-active">挂单中</a>
+                <a href="#deal" class="mui-control-item">交易中</a>
+                <a href="#achieve" class="mui-control-item">已完成</a>
+            </div>
+            <div class="mui-content-padded orderBox">
+                <div id="sell" class="mui-control-content mui-active">
+                    {volist name="list" id="vo"}
+                    {if condition="$vo.status == 0"}
+                    <div class="orderList">
+                        <div class="orderTop">
+                            <p>
+                                <span>{$vo.deal_id}({if condition="$vo.buy_user_id==0"}出售{else /}收购{/if})</span>
+                                <span>数量：{$vo.amount}STBC</span>
+                            </p>
+                            <a href="javascript:;">下架</a>
+                        </div>
+                        <p class="orderBot">
+                            <span>{$vo.insert_time}</span>
+                            <span class="blueRd">单价：{$vo.unit_price}CNY</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                    <!-- <div class="orderList">
+                        <div class="orderTop">
+                            <p>
+                                <span>哈哈收币</span>
+                                <span>数量：100USDT</span>
+                            </p>
+                            <a href="javascript:;">下架</a>
+                        </div>
+                        <p class="orderBot">
+                            <span>2020-01-01 11:11:23</span>
+                            <span class="blueRd">单价：1.23</span>
+                        </p>
+                    </div> -->
+                </div>
+                <div id="deal" class="mui-control-content">
+                    {volist name="list" id="vo"}
+                    {if condition="$vo.status != 0 && $vo.status != 3"}
+                    <div class="orderList">
+                        <div class="orderTop">
+                            <p>
+                                <span>{$vo.deal_id}</span>
+                                <span>数量：{$vo.amount}STBC</span>
+                            </p>
+                            <a href="/index/deal/order/detail/{$vo.deal_id}">详情</a>
+                        </div>
+                        <p class="orderBot">
+                            <span>{$vo.operation_time}</span>
+                            <span class="blueRd">单价：{$vo.unit_price}CNY</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+                <div id="achieve" class="mui-control-content">
+                    {volist name="list" id="vo"}
+                    {if condition="$vo.status == 3"}
+                    <div class="orderList">
+                        <div class="orderTop">
+                            <p>
+                                <span>{$vo.deal_id}</span>
+                            </p>
+                            <p>
+                                <span class="blueRd">单价：{$vo.unit_price}CNY</span>
+                            </p>
+                        </div>
+                        <p class="orderBot">
+                            <span>数量：{$vo.amount}STBC</span>
+                            <span>{$vo.operation_time}</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        location.href = "/index/deal";
+    })
+
+</script>
+
+</body>
+</html>

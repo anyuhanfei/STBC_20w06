@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>修改密码</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">修改密码</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox">
+                <p class="topTitle">原密码</p>
+                <div class="iptTop">
+                    <input type="password"placeholder="请输入原密码">
+                </div>
+                <p class="topTitle">设置新密码</p>
+                <div class="iptTop">
+                    <input type="password"placeholder="请设置新密码">
+                </div>
+                <p class="topTitle">确认新密码</p>
+                <div class="iptTop">
+                    <input type="password"placeholder="请确认新密码">
+                </div>
+                <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+
+</script>
+
+</body>
+</html>

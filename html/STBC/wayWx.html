@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>收款方式</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">收款方式</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox">
+                <p class="topTitle">收款方式</p>
+                <div class="iptTop">
+                    <input type="text" value="微信" readonly>
+                </div>
+                <p class="topTitle">微信帐号</p>
+                <div class="iptTop">
+                    <input type="text"placeholder="请输入微信帐号">
+                </div>
+                <p class="topTitle">收款人姓名</p>
+                <div class="iptTop">
+                    <input type="text"placeholder="请输入收款人姓名">
+                </div>
+                <p class="topTitle">收款人二维码</p>
+                <div class="iptTop">
+                    <label for="photo">
+                        <input type="file" id="photo" class="" onchange="upload(this ,0)" accept="image/*">
+                        <img src="img/file_img.png" class="img0" alt="">
+                    </label>
+                </div>
+                <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+    function upload(e, i) {
+        var file = e.files[0]
+        if (e.files) {
+            var reader = new FileReader()
+            reader.readAsDataURL(e.files[0]);
+            reader.onload = function (e) {
+                var src = this.result
+                $('.img'+i+'').attr('src', src)
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

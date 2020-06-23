@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>注册</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="loginImg">
+            <i class="returnBtn"></i>
+            <img src="img/logo.png" alt="">
+        </div>
+        <div class="loginIpt">
+            <label>
+                <input type="text" placeholder="请输入手机号">
+            </label>
+            <label>
+                <input type="password" placeholder="请设置密码">
+            </label>
+            <label>
+                <input type="password" placeholder="确认密码">
+            </label>
+            <label>
+                <input type="text" placeholder="邀请码">
+            </label>
+            <label>
+                <input type="text" placeholder="验证码">
+                <i class="btnTime">获取</i>
+            </label>
+            <a href="javascript:;" class="loginBtn">确认注册</a>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/login.js"></script>
+<script>
+    mui.init()
+    $('.returnBtn').click(function () {
+        history.go(-1)
+    })
+    var state = true;
+    $('.btnTime').click(function () {
+        var that = this
+        if ( state && $(that).text() == '获取') {
+            second = 60
+            var countDown = setInterval(function () {
+                second--
+                if(second <= 0){
+                    clearInterval(countDown)
+                    $(that).text('获取')
+                    state = true;
+                }else {
+                    $(that).text(second)
+                    state = false;
+                }
+            }, 1000)
+        }
+    })
+
+
+
+
+
+
+</script>
+</body>
+</html>

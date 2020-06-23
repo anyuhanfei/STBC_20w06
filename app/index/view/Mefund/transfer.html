@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>会员互转</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">会员互转</h1>
+        <a href="/index/me/transfer/log" class="head-tit_right">互转记录</a>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox">
+                <p class="topTitle">对方手机号</p>
+                <div class="iptTop">
+                    <input type="text" id="phone" placeholder="请输入对方手机号">
+                </div>
+                <p class="topTitle">转让金额(STBC)</p>
+                <div class="iptTop">
+                    <input type="text" id="amount" placeholder="请输入转让金额">
+                </div>
+                <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        location.href = "/index/me"
+    })
+
+    $(".memberBtn").click(function(){
+        var amount = $("#amount").val();
+        var phone = $("#phone").val();
+        $.ajax({
+            url: "/index/me/transfer/submit",
+            type: "post",
+            data: {amount: amount, phone: phone},
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/me/transfer"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

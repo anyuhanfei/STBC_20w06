@@ -19,6 +19,14 @@ class LogUserFund extends Model{
         return ['提现', '提现手续费'];
     }
 
+    public function getColorAttr($value, $data){
+        if(intval($data['number']) > 0){
+            return 'red';
+        }else{
+            return 'green';
+        }
+    }
+
     public static function create_data($user_id, $number, $coin_type, $fund_type, $content, $remark = '', $insert_time = ''){
         self::create([
             'user_id'=> $user_id,
@@ -28,7 +36,7 @@ class LogUserFund extends Model{
             'fund_type'=> $fund_type,
             'content'=> $content,
             'remark'=> $remark,
-            'inser_time'=> $insert_time == '' ? date("Y-m-d H:i:s", time()) : $insert_time
+            'insert_time'=> $insert_time == '' ? date("Y-m-d H:i:s", time()) : $insert_time
         ]);
     }
 }

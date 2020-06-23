@@ -1,0 +1,161 @@
+* {
+    touch-action: pan-y;
+}
+.mui-bar{
+    box-shadow: none;
+}
+.mui-tab-item img{
+    width: 100%;
+    height: 100%;
+}
+p,h1,h2,h3,h4,h5,ul,li,i{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+}
+input{
+    margin: 0!important;
+    padding: 0 5px;
+    color: #333333;
+    -webkit-user-select: auto!important;
+}
+input::-webkit-input-placeholder{
+    color: #9a9da8;
+}
+/*公用头部*/
+.head_bg{
+    background: #152a47;
+}
+.nav_bg{
+    background: #fff;
+}
+.content_bg{
+    background-image: url("../img/login_bg.png");
+    background-size: 100% 100%;
+}
+.head_bg .mui-title{
+    color: #fffffd;
+}
+.mui-bar-tab .mui-tab-item.mui-active{
+    color: #000;
+}
+.btn_return{
+    color: white;
+}
+
+/*按钮*/
+.btn_keys{
+    display: block;
+    margin: 1.25rem auto;
+    width: 12.5rem;
+    height: 2.5rem;
+    border: none;
+    outline:none;
+    /*border-radius: 3.125rem;*/
+    background: #8a6de9;
+    color: #fffef9;
+    -moz-box-shadow:0rem 0.1875rem 0.3125rem #53A7B2;
+    -webkit-box-shadow:0rem 0.1875rem 0.3125rem #53A7B2;
+    box-shadow:0rem 0.1875rem 0.3125rem #53A7B2;
+}
+/*登录*/
+.loginImg{
+    padding: 60px 0 30px 0;
+    position: relative;
+}
+.loginImg .returnBtn{
+    display: block;
+    height: 15px;
+    width: 40px;
+    background-image: url("../img/returnBtn.png");
+    background-size: 100% 100%;
+    position: absolute;
+    left: 8%;
+    top: 10%;
+}
+.loginImg img{
+    display: block;
+    height: 100%;
+    width: 80px;
+    margin: 0 auto;
+}
+.loginIpt{
+    height: auto;
+    position: relative;
+    padding: 15px 20px;
+}
+.loginIpt label{
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    border: 1px solid #08527d;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: rgba(8,27,73,.8);
+}
+.loginIpt label span{
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    /*width: 68px;*/
+    padding-left: 30px;
+    font-size: 15px;
+    /*text-align: center;*/
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: 3px;
+}
+.loginIpt label .user{
+    background-image: url("../img/user.png");
+}
+.loginIpt label .pass{
+    background-image: url("../img/pass.png");
+}
+.loginIpt label input{
+    border: none;
+    height: 32px;
+    width: 75%;
+    flex-grow: 1;
+    font-size: 15px;
+    color: #9a9da8;
+    background-color: transparent;
+}
+.loginIpt label i{
+    display: block;
+    width: 100px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 16px;
+    color: #1f7ffa;
+}
+.loginIpt label i img{
+    width: 100%;
+    height: 100%;
+}
+.loginIpt .loginBtn{
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #2992ed;
+    color: #fff;
+    margin: 30px auto 20px auto;
+    font-size: 15px;
+}
+.loginIpt .loginNav{
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    align-items: center;
+    padding: 8px 0;
+}
+.loginIpt .loginNav .forget{
+    color: #2692ea;
+}
+.loginIpt .loginNav .register{
+    color: #2692ea;
+}

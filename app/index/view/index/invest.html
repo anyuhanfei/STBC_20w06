@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>入金</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <h1 class="mui-title">入金</h1>
+    </header>
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="/" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="/index/log" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="/index/deal" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="/index/me" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="enterBox">
+                <p class="headline"><span>入金额度(USDT)</span></p>
+                <div class="selectBtn">
+                    <div>
+                        <input type="radio" id="number1" name="keku" value="100">
+                        <label for="number1">100</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number2" name="keku" value="300">
+                        <label for="number2">300</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number3" name="keku" value="500">
+                        <label for="number3">500</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number4" name="keku" value="1000">
+                        <label for="number4">1000</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number5" name="keku" value="2000">
+                        <label for="number5">2000</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number6" name="keku" value="3000">
+                        <label for="number6">3000</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number7" name="keku" value="4000">
+                        <label for="number7">4000</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="number8" name="keku" value="5000">
+                        <label for="number8">5000</label>
+                    </div>
+                </div>
+                <p class="headline"><span>下单金额</span></p>
+                <div class="iptBox">
+                    <input type="text" id="numSum" readonly>
+                </div>
+                <p class="headline">
+                    <span>USDT金额</span>
+                    <span class="red">金额:{$user->userfund->money}</span>
+                </p>
+                <p class="headline">
+                    <span class="red">先充值USDT再入金</span>
+                    <span class="boxes">USDT充值接口</span>
+                </p>
+                <div class="iptBox">
+                    <input type="text" id="usdt" placeholder="请输入USDT金额,大于下单金额的{$invest_usdt_pct}%">
+                </div>
+                <p class="headline"><span>STBC金额</span></p>
+                <div class="iptBox">
+                    <input type="text" id="stbc" placeholder="自动换算STBC个数">
+                </div>
+                <p class="headline"><span class="red">STBC个数：{$user->userfund->stbc}</span></p>
+                <a href="javascript:;" class="buttonKey">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+
+    $("input[type='radio']").click(function () {
+        if(this.value == 4000 || this.value == 5000){
+            mui.toast('暂未开放');
+            return;
+        }
+        $("#numSum").val(this.value)
+    })
+
+    $("#usdt").change(function(){
+        var usdt = parseInt($("#usdt").val())
+        $("#stbc").val(((($("#numSum").val() - usdt) / parseFloat("{$b}")).toFixed(2)));
+    })
+
+    $(".buttonKey").click(function(){
+        $.ajax({
+            url: "/index/invest/submit",
+            type: "post",
+            data: {usdt_amount: $("#usdt").val(), number: $("#numSum").val()},
+            success: function(data){
+                data = JSON.parse(data);
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

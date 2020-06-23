@@ -377,6 +377,7 @@ class Cms extends Admin{
         $data['title'] = $title;
         $data['category_id'] = $category_id;
         $data['content'] = $content;
+        $data['insert_time'] = date("Y-m-d", time());
         $article = CmsArticle::create($data);
         if($article){
             $this->remove_content_image($content, 'cookie', 'article_content_images');

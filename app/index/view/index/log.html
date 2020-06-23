@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>收益</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <h1 class="mui-title">收益</h1>
+    </header>
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="/" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="/index/invest" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="/index/deal" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="/index/me" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="deal-title_box mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative mui-scroll-wrapper mui-slider-indicator">
+                <div class="mui-scroll tab-tit_color">
+                    <a href="#all_1" class="mui-control-item mui-active"><span>USDT</span></a>
+                    <a href="#all_2" class="mui-control-item"><span>STBC</span></a>
+                    <a href="#all_3" class="mui-control-item"><span>动态收益</span></a>
+                    <a href="#all_4" class="mui-control-item"><span>静态收益</span></a>
+                </div>
+            </div>
+            <div class="mui-content-padded earningsBox">
+                <div id="all_1" class="mui-control-content mui-active">
+                    <h5 class="allHeader">余额:{$user.userfund.money}</h5>
+                    {volist name="obj" id="vo"}
+                    {if condition="$vo.coin_type == 'money'"}
+                    <div class="earnList">
+                        <p>
+                            <span>说明</span>
+                            <span>{$vo.content}</span>
+                        </p>
+                        <p>
+                            <span>数量</span>
+                            <span class="{$vo.color}">{$vo.number}</span>
+                        </p>
+                        <p>
+                            <span>时间</span>
+                            <span>{$vo.insert_time}</span>
+                        </p>
+                        <p>
+                            <span>类型</span>
+                            <span>{$vo.fund_type}</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+                <div id="all_2" class="mui-control-content">
+                    <h5 class="allHeader">余额:{$user.userfund.stbc}</h5>
+                    {volist name="obj" id="vo"}
+                    {if condition="$vo.coin_type == 'stbc'"}
+                    <div class="earnList">
+                        <p>
+                            <span>说明</span>
+                            <span>{$vo.content}</span>
+                        </p>
+                        <p>
+                            <span>数量</span>
+                            <span class="{$vo.color}">{$vo.number}</span>
+                        </p>
+                        <p>
+                            <span>时间</span>
+                            <span>{$vo.insert_time}</span>
+                        </p>
+                        <p>
+                            <span>类型</span>
+                            <span>{$vo.fund_type}</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+                <div id="all_3" class="mui-control-content">
+                    <h5 class="allHeader"></h5>
+                    {volist name="obj" id="vo"}
+                    {if condition="$vo.fund_type == '总业绩奖' || $vo.fund_type == '代数奖' || $vo.fund_type == '见点奖'"}
+                    <div class="earnList">
+                        <p>
+                            <span>说明</span>
+                            <span>{$vo.content}</span>
+                        </p>
+                        <p>
+                            <span>数量</span>
+                            <span class="{$vo.color}">{$vo.number}</span>
+                        </p>
+                        <p>
+                            <span>时间</span>
+                            <span>{$vo.insert_time}</span>
+                        </p>
+                        <p>
+                            <span>类型</span>
+                            <span>{$vo.fund_type}</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+                <div id="all_4" class="mui-control-content">
+                    <h5 class="allHeader"></h5>
+                    {volist name="obj" id="vo"}
+                    {if condition="$vo.fund_type == '静态收益'"}
+                    <div class="earnList">
+                        <p>
+                            <span>说明</span>
+                            <span>{$vo.content}</span>
+                        </p>
+                        <p>
+                            <span>数量</span>
+                            <span class="{$vo.color}">{$vo.number}</span>
+                        </p>
+                        <p>
+                            <span>时间</span>
+                            <span>{$vo.insert_time}</span>
+                        </p>
+                        <p>
+                            <span>类型</span>
+                            <span>{$vo.fund_type}</span>
+                        </p>
+                    </div>
+                    {/if}
+                    {/volist}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+
+
+</script>
+</body>
+</html>

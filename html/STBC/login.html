@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="loginImg">
+            <img src="img/logo.png" alt="">
+        </div>
+        <div class="loginIpt">
+            <label>
+                <span class="user"></span>
+                <input type="text" placeholder="请输入手机号">
+            </label>
+            <label>
+                <span class="pass"></span>
+                <input type="password" placeholder="请输入密码">
+            </label>
+            <p class="loginNav">
+                <a href="register.html" class="register">立即注册</a>
+                <a href="forget.html" class="forget">忘记密码?</a>
+            </p>
+            <a href="javascript:;" class="loginBtn">登录</a>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/login.js"></script>
+<script>
+    mui.init()
+</script>
+</body>
+</html>

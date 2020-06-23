@@ -14,10 +14,18 @@ class IdxDeal extends Model{
     }
 
     public function buyuser(){
-        return $this->hasOne('idx_user', 'buy_user_id', 'user_id');
+        return $this->hasOne('idx_user', 'user_id', 'buy_user_id');
     }
 
     public function selluser(){
-        return $this->hasOne('idx_user', 'sell_user_id', 'user_id');
+        return $this->hasOne('idx_user', 'user_id', 'sell_user_id');
+    }
+
+    public function getTextAttr($value, $data){
+        return ($data['status'] == 0) ? (($data['buy_user_id'] == 0) ? '买' : '卖') : '交易';
+    }
+
+    public function getColorAttr($value, $data){
+        return ($data['status'] == 0) ? (($data['buy_user_id'] == 0) ? 'red' : 'green') : 'blue';
     }
 }

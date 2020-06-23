@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>行业资讯</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">行业资讯</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="informBox">
+                <div class="informList" onclick="location.href = 'details.html'">
+                    <img src="img/banner.png" alt="">
+                    <div class="right">
+                        <h5>标题标题标标题标题标标题标题标</h5>
+                        <p>卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发</p>
+                        <span>2020-01-01 11:11:11</span>
+                    </div>
+                </div>
+                <div class="informList">
+                    <img src="img/banner.png" alt="">
+                    <div class="right">
+                        <h5>标题标题标标题标题标标题标题标</h5>
+                        <p>卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发</p>
+                        <span>2020-01-01 11:11:11</span>
+                    </div>
+                </div>
+                <div class="informList">
+                    <img src="img/banner.png" alt="">
+                    <div class="right">
+                        <h5>标题标题标标题标题标标题标题标</h5>
+                        <p>卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发卡福利卡舒服多了卡健身房的惊世毒妃卢萨卡就爱上了打开就发送到发</p>
+                        <span>2020-01-01 11:11:11</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+
+</script>
+
+</body>
+</html>

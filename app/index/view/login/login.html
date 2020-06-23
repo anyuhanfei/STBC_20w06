@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/login.css">
+
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="loginImg">
+            <img src="/static/index/img/logo.png" alt="">
+        </div>
+        <div class="loginIpt">
+            <label>
+                <span class="user"></span>
+                <input type="text" id="account" placeholder="请输入手机号">
+            </label>
+            <label>
+                <span class="pass"></span>
+                <input type="password" id="password" placeholder="请输入密码">
+            </label>
+            <p class="loginNav">
+                <a href="register.html" class="register">立即注册</a>
+                <a href="forget.html" class="forget">忘记密码?</a>
+            </p>
+            <a href="javascript:;" class="loginBtn">登录</a>
+        </div>
+    </div>
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/login.js"></script>
+<script>
+    mui.init()
+
+    $(".loginBtn").click(function(){
+        var account = $("#account").val();
+        var password = $("#password").val();
+        $.ajax({
+            url: "/index/login/submit",
+            type: "post",
+            data: {account: account, password: password},
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/"
+                    }, 1500);
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

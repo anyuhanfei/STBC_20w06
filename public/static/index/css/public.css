@@ -1,0 +1,1317 @@
+* {
+    touch-action: pan-y;
+}
+.mui-bar{
+    box-shadow: none;
+}
+.mui-tab-item img{
+    width: 100%;
+    height: 100%;
+}
+p,h1,h2,h3,h4,h5,ul,li,i{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+}
+input{
+    margin: 0!important;
+    padding: 0 5px;
+    border: none;
+    -webkit-user-select: auto!important;
+}
+input[type='password']{
+    width: 100%;
+}
+input::-webkit-input-placeholder{
+    color: #9a9da8;
+}
+/*公用头部*/
+.head_bg{
+    background: #05132d;
+}
+.content_bg{
+    background-image: url("../img/conBg.png");
+    background-size: 100% 100%;
+}
+.head_bg .mui-title{
+    color: #fefefe;
+}
+.btn_return{
+    color: white;
+}
+/*头部标签*/
+.head-a_left img,
+.head-a_right img{
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0.9375rem 0.3125rem 0 0.3125rem;
+}
+.head-a_left{
+    float: left;
+}
+.head-a_right{
+    float: right;
+}
+.head-tit_right{
+    float: right;
+    margin-top: 0.8125rem;
+    font-size: 0.9375rem;
+    color: #fff;
+    position: relative;
+    z-index: 999;
+}
+.head-tit_right:link{
+    color: #fff;
+}
+/*底部导航*/
+.nav_bg{
+    background: #05132d;
+}
+.mui-bar-tab .mui-tab-item.mui-active{
+    color: #1f7ffa;
+}
+.mui-bar-tab .mui-tab-item{
+    color: #ededed;
+}
+.icon_1{
+    background: url("../img/icon_1.png")no-repeat;
+    background-size: 100% 100%;
+}
+.mui-active .icon_1{
+    background: url("../img/icon_2.png")no-repeat;
+    background-size: 100% 100%;
+}
+.icon_2{
+    background: url("../img/icon_3.png")no-repeat;
+    background-size: 100% 100%;
+}
+.mui-active .icon_2{
+    background: url("../img/icon_4.png")no-repeat;
+    background-size: 100% 100%;
+}
+.icon_3{
+    background: url("../img/icon_5.png")no-repeat;
+    background-size: 100% 100%;
+}
+.mui-active .icon_3{
+    background: url("../img/icon_6.png")no-repeat;
+    background-size: 100% 100%;
+}
+.icon_4{
+    background: url("../img/icon_7.png")no-repeat;
+    background-size: 100% 100%;
+}
+.mui-active .icon_4{
+    background: url("../img/icon_8.png")no-repeat;
+    background-size: 100% 100%;
+}
+.icon_5{
+    background: url("../img/icon_9.png")no-repeat;
+    background-size: 100% 100%;
+}
+.mui-active .icon_5{
+    background: url("../img/icon_10.png")no-repeat;
+    background-size: 100% 100%;
+}
+
+/*按钮*/
+.buttonKey{
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #2992ed;
+    color: #fff;
+    margin: 30px auto 20px auto;
+    font-size: 15px;
+}
+.memberBtn{
+    margin-top: 45px;
+}
+.buttonKey:link{
+    color: #fff;
+}
+/*首页*/
+.indexHeader{
+    background-image: url("../img/indexHead.png");
+    background-size: 100% 100%;
+}
+.indexHeader .mui-title{
+    color: #ffffff;
+}
+.indexContent{
+    background-image: url("../img/indexCon.png");
+    background-size: 100% 100%;
+    margin-top: 44px;
+    padding-top: 0!important;
+}
+.bannerBox{
+    height: 150px;
+    margin: 0 20px;
+    border-radius: 5px;
+}
+.bannerBox .swiper-container{
+    width: 100%;
+    height: 100%;
+}
+.bannerBox .swiper-container img{
+    width: 100%;
+    height: 100%;
+}
+.bannerBox .swiper-pagination-bullet{
+    background-color: white;
+    opacity: 1;
+}
+.bannerBox .activeSwiper{
+    width: 15px;
+    border-radius: 3px;
+    background-color: #f3d00c;
+    opacity: 1;
+}
+.noticeBox{
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+}
+.noticeBox .noticeBg{
+    display: block;
+    width: 60px;
+    height: 35px;
+    background-image: url("../img/noticeBg.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: 20px;
+}
+
+.echartsBox{}
+.echartsBox .echartsTitle{
+    height: 40px;
+    position: relative;
+}
+.echartsBox .echartsTitle h5{
+    width: 45%;
+    height: 40px;
+    margin: 0 auto;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    color: #63d59b;
+}
+.echartsBox .echartsTitle p{
+    margin: 0;
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+.echartsBox .echartsTitle p span{
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #f35656;
+}
+.echartsBox .echartsCont{
+    padding: 5px;
+    height: 160px;
+}
+
+.indexInform{
+    margin-top: 10px;
+    background: rgba(6,17,41,.8);
+}
+.indexInform .top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+    align-items: center;
+    border-bottom: 1px dashed #fff;
+}
+.indexInform .top h5{
+    height: 35px;
+    line-height: 35px;
+    color: #ffffff;
+    font-size: 16px;
+}
+.indexInform .top a{
+    font-size: 13px;
+}
+.indexInform .bot{
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.indexInform .bot img{
+    width: 100px;
+    height: 60px;
+}
+.indexInform .bot .right{
+    flex-grow: 1;
+    margin-left: 8px;
+}
+.indexInform .bot .right h5{
+    height: 25px;
+    line-height: 25px;
+    color: #ffffff;
+    font-size: 15px;
+}
+.indexInform .bot .right p{
+    height: 17px;
+    line-height: 17px;
+    color: #ffffff;
+    font-size: 12px;
+}
+.indexInform .bot .right .rightCont{
+    display: flex;
+    align-items: center;
+}
+.indexInform .bot .right .rightCont span{
+    display: block;
+    width: 60%;
+    line-height: 17px;
+    color: #ffffff;
+    font-size: 12px;
+    box-sizing: border-box;
+    -webkit-line-clamp:1;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    /* overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
+}
+.indexInform .bot .right .rightCont a{}
+.indexInform .bot .right .rightText{
+    text-align: right;
+}
+.coinList{
+    padding: 8px 0;
+}
+.coinList .listHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(6,17,41,.8);
+    margin-bottom: 8px;
+}
+.coinList .listHeader span{
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    width: 33%;
+    text-align: center;
+    font-size: 15px;
+    color: #cccccc;
+}
+.coinList ul{}
+.coinList ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(6,17,41,.8);
+    margin-bottom: 8px;
+}
+.coinList ul li p{
+    height: 35px;
+    line-height: 35px;
+    width: 33%;
+    text-align: center;
+}
+.coinList ul li p:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coinList ul li p:nth-child(1) img{
+    width: 20px;
+    height: 20px;
+}
+.coinList ul li p:nth-child(1) span{
+    padding-left: 8px;
+    font-size: 12px;
+    color: #eeeeee;
+}
+.coinList ul li p:nth-child(2) span{
+    display: block;
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #eeeeee;
+}
+.coinList ul li .red{
+    color: #c55353!important;
+}
+.coinList ul li .green{
+    color: #4cb44f!important;
+}
+
+/*入金*/
+.enterBox{
+    padding: 8px 15px;
+}
+.enterBox .headline{
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+    line-height: 35px;
+    align-items: center;
+}
+.enterBox .headline span{
+    font-size: 15px;
+    color: #ffffff;
+}
+.enterBox .headline .red{
+    font-size: 13px;
+    color: #dd4444;
+}
+.enterBox .headline .boxes{
+    display: block;
+    height: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 0 5px;
+    background-color: #1f7ffa;
+    color: #fff;
+    border-radius: 5px;
+}
+.enterBox .selectBtn{
+    display: flex;
+    flex-wrap: wrap;
+}
+.enterBox .selectBtn div{
+    width: 15%;
+    margin: 0 1.5% 5px 0;
+}
+.enterBox .selectBtn div input{
+    display: none;
+}
+.enterBox .selectBtn div label{
+    display: block;
+    width: 100%;
+    height: 25px;
+    border: 1px solid #0c536d;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    font-size: 12px;
+    background-color: #0e2045;
+}
+.enterBox .selectBtn div input[type='radio']:checked+label{
+    background-color: #1f54bf;
+}
+.enterBox .iptBox{
+    width: 100%;
+    border: 1px solid #0c536d;
+    background-color: #0e2045;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.enterBox .iptBox input{
+    height: 35px;
+    background-color: transparent;
+    font-size: 15px;
+    color: #fff;
+}
+
+/*收益*/
+.deal-title_box{
+    border: none;
+    border-radius: 0;
+    margin: 5px 0;
+    padding: 5px 0;
+    background-color: #0e2045;
+}
+.deal-title_box .mui-control-item{
+    height: 25px;
+    width: 60px;
+    border: none!important;
+    margin: 0 8px;
+    overflow:visible;
+    padding: 0 10px!important;
+}
+.deal-title_box .mui-control-item span{
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    width: 60px;
+    text-align: center;
+    color: #fff;
+}
+.deal-title_box .mui-control-item.mui-active{
+    background-color: transparent;
+    position: relative;
+    font-weight: 600;
+    border: none!important;
+}
+.deal-title_box .mui-control-item.mui-active span{
+    color: #00ffff;
+}
+.deal-title_box .mui-control-item.mui-active:before{
+    content: '';
+    display: block;
+    width: 60px;
+    height: 0.125rem;
+    background: #00ffff;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -30px;
+}
+.mui-content-padded{
+    margin: 0 0 25px 0;
+    padding: 5px 10px;
+}
+.earningsBox .allHeader{
+    text-align: right;
+    font-size: 18px;
+    color: #00ffff;
+    margin-bottom: 15px;
+}
+.earningsBox .earnList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+}
+.earningsBox .earnList p{
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    line-height: 25px;
+}
+.earningsBox .earnList p span{
+    font-size: 13px;
+    color: #fff;
+}
+.earningsBox .earnList p .red{
+    color: #dd4444;
+}
+.earningsBox .earnList p .green{
+    color: #3ad03d;
+}
+/*C2C*/
+.c2cHeader{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 5px 8px 5px;
+}
+.c2cHeader div{
+    width: 49%;
+    height: 90px;
+    padding: 20px 0 0 20px;
+}
+.c2cHeader div h5{
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #fff;
+}
+.c2cHeader div p{
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+}
+.c2cHeader .left{
+    background-image: url("../img/c2c.png");
+    background-size: 100% 100%;
+}
+.c2cHeader .right{
+    background-image: url("../img/banner1.png");
+    background-size: 100% 100%;
+}
+.c2cBox{
+    padding: 0 5px;
+}
+.c2cBox .c2cList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+}
+.c2cBox .c2cList p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    line-height: 25px;
+}
+.c2cBox .c2cList p span{
+    font-size: 13px;
+    color: #fff;
+}
+.c2cBox .c2cList p .blue{
+    color: #1f7ffa;
+    font-size: 15px;
+}
+.c2cBox .c2cList p a{
+    display: block;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    font-size: 13px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 25px;
+}
+.c2cBox .c2cList p .red{
+    background-color: #dd4444;
+}
+.c2cBox .c2cList p .green{
+    background-color: #44dd81;
+}
+
+.c2cMengBan{
+    display: none;
+}
+.c2cMengBan .tankuang1{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin: 80% 5% 0 5%;
+    background-color: #0e2045;
+    padding: 5px 15px 10px 15px;
+    display: none;
+}
+.c2cMengBan .tankuang1 p{
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    color: #fff;
+}
+.c2cMengBan .tankuang1 h5{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #e85252;
+}
+.c2cMengBan .funBtn{
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.c2cMengBan .funBtn a{
+    display: block;
+    width: 30%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.c2cMengBan .funBtn a:nth-child(1){
+    background-color: #eeeeee;
+    color: #05132d;
+}
+.c2cMengBan .funBtn a:nth-child(2){
+    background-color: #1f7ffa;
+    color: #eeeeee;
+}
+.c2cMengBan .tankuang2{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin: 80% 5% 0 5%;
+    background-color: #0e2045;
+    padding: 5px 15px 10px 15px;
+    display: none;
+}
+.c2cMengBan .tankuang2 p{
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.c2cMengBan .tankuang2 p span{}
+
+
+/*挂单*/
+.hangGd{
+    display: flex;
+}
+.hangGd .numBox{
+    width: 60px;
+    background-color: #fff;
+}
+.hangGd .numBox i{
+    display: block;
+    height: 18px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.hangGd .numBox i:last-child{
+    border: none;
+}
+.hangGd .numBox i:nth-child(1):before{
+    content: '';
+    display: block;
+    width: 0px;
+    border: 7px solid transparent;
+    border-bottom-color: #000;
+    margin: -3px auto 0 auto;
+}
+.hangGd .numBox i:nth-child(2):before{
+    content: '';
+    display: block;
+    width: 0px;
+    border: 7px solid transparent;
+    border-top-color: #000;
+    margin: 5px auto 0 auto;
+}
+/*我的订单*/
+.orderTabe{}
+.orderTabe{
+    margin: 5px 0 10px 0;
+    border: none;
+    border-radius: 0;
+    background: #0e2045;
+}
+.orderTabe .mui-control-item{
+    border: none;
+    color: #bdbec1;
+}
+.orderTabe .mui-control-item.mui-active{
+    background-color: transparent;
+    color: #00ffff;
+    font-weight: 600;
+    position: relative;
+}
+.orderTabe .mui-control-item.mui-active:before{
+    content: '';
+    display: block;
+    width: 3.125rem;
+    height: 0.125rem;
+    background: #00ffff;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5625rem;
+}
+.orderBox{
+    padding: 0 10px;
+}
+.orderList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    padding: 8px 10px;
+}
+.orderList .orderTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.orderList .orderTop p{}
+.orderList .orderTop p span{
+    display: block;
+    height: 23px;
+    line-height: 23px;
+    font-size: 15px;
+    color: #fff;
+}
+.orderList .orderTop a{
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0 10px;
+    border-radius: 20px;
+    color: #fff;
+    background-color: #dd4444;
+}
+.orderList .orderBot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.orderList .orderBot span{
+    font-size: 13px;
+    color: #fff;
+}
+.orderList .blueRd{
+    font-size: 16px!important;
+    color: #1e7efa!important;
+}
+/*订单详情*/
+#select{
+    background-image: url("../img/down.png");
+    background-repeat: no-repeat;
+    background-size: 15px 8px;
+    background-position: 95%;
+}
+.orderDetaBox .iptTop{
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    color: #fff;
+    padding: 0 10px;
+}
+.orderDetaBox .order_1,
+.orderDetaBox .order_2{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    padding: 8px 10px;
+}
+.orderDetaBox .order_1 p,
+.orderDetaBox .order_2 p{
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+}
+.orderDetaBox .order_2 .green,
+.orderDetaBox .order_1 .green{
+    color: #00f7f7;
+}
+.orderDetaBox .order_2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.orderDetaBox .order_2 .leftIF{}
+.orderDetaBox .order_2 img{
+    width: 60px;
+    height: 75px;
+}
+.orderDetaBox .order_1 label{
+    display: block;
+    width: 120px;
+    height: 150px;
+    margin: 0 auto;
+}
+.orderDetaBox .order_1 label input{
+    display: none;
+}
+.orderDetaBox .order_1 label img{
+    width: 100%;
+    height: 100%;
+}
+.orderDetaBox .order_1 p span{
+    color: #1a6ad5;
+}
+.offline{
+    display: none;
+}
+.usdtBox{
+    display: none;
+}
+
+
+.orderMengBan{
+    display: none;
+}
+.orderMengBan .selectList{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(5,18,43,.8);
+    display: none;
+}
+.orderMengBan .selectList p{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #efefef;
+    border-bottom: 1px solid #efefef;
+}
+.orderMengBan .selectList p:nth-child(3){
+    border-bottom: none;
+}
+.imgMengBan{
+    display: none;
+}
+.imgMengBan .imgBox{
+    width: 80%;
+    height: 60%;
+    margin: 30% auto 0 auto;
+}
+.imgMengBan .imgBox img{
+    width: 100%;
+    height: 100%;
+}
+    /*我的*/
+.userShow_box{
+    padding: 1.875rem 0 0.9375rem 2.1875rem;
+    display: flex;
+    align-items: center;
+}
+.userShow_box i{
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.userShow_box i img{
+    width: 100%;
+    height: 100%;
+}
+.userShow_box .user{
+    flex-grow: 1;
+    padding: 0 0 0 1.25rem;
+}
+.userShow_box .user p{
+    margin: 0;
+    height: 1.4375rem;
+    line-height: 1.4375rem;
+    font-size: 0.9375rem;
+    color: #f6ffff;
+}
+.myContent{
+    padding: 0 5px 10px 5px;
+}
+.myUser{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    overflow: hidden;
+}
+.myUser .top{
+    padding: 5px 5px 5px 25px;
+    border-bottom: 1px solid #0a596f;
+}
+.myUser .top p{
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+}
+.myUser .bot{
+    display: flex;
+}
+.myUser .bot .botBox{
+    width: 50%;
+    border-left: 1px solid #0a596f;
+    margin-left: -1px;
+    padding: 8px 0;
+}
+.myUser .bot .botBox p{
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+}
+.myContent .myNav{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    overflow: hidden;
+}
+.myContent .myNav a{
+    display: block;
+    width: 33.3%;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #0a596f;
+    margin-left: -1px;
+    margin-top: -1px;
+    border-right: none;
+    border-bottom: none;
+    font-size: 15px;
+    color: #ffffff;
+}
+.myContent .myNav a:before{
+    content: '';
+    display: block;
+    height: 35px;
+    width: 35px;
+    margin: 0 auto 5px auto;
+}
+.myContent .myNav a:nth-child(1):before{
+    background-image: url("../img/myNav1.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(2):before{
+    background-image: url("../img/myNav2.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(3):before{
+    background-image: url("../img/myNav3.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(4):before{
+    background-image: url("../img/myNav4.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(5):before{
+    background-image: url("../img/myNav5.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(6):before{
+    background-image: url("../img/myNav6.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(7):before{
+    background-image: url("../img/myNav7.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(8):before{
+    background-image: url("../img/myNav8.png");
+    background-size: 100% 100%;
+}
+.myContent .myNav a:nth-child(9):before{
+    background-image: url("../img/myNav9.png");
+    background-size: 100% 100%;
+}
+
+/*账户充值*/
+.topUpBox{
+    padding: 10px 15px;
+}
+.topUpBox .topTitle{
+    height: 35px;
+    line-height: 35px;
+    font-size: 16px;
+    color: #fff;
+}
+.topUpBox .iptTop{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    background-color: #0e2045;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+.topUpBox .iptTop input{
+    background-color: transparent;
+    height: 35px;
+    font-size: 15px;
+    color: #fff;
+}
+.topUpBox .iptTop label{
+    display: block;
+    height: 150px;
+    width: 120px;
+    margin: 30px auto;
+}
+.topUpBox .iptTop label input{
+    display: none;
+}
+.topUpBox .iptTop label img{
+    width: 100%;
+    height: 100%;
+}
+.topUpBox .iptFlex{
+    display: flex;
+}
+.topUpBox .iptTop span{
+    display: block;
+    font-size: 16px;
+    color: #007aff;
+    width: 50px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+}
+/*充值记录*/
+.topRecord{
+    padding: 10px 0 20px 0;
+}
+.topRecord .titRecord,
+.topRecord .conRecord li{
+    display: flex;
+    justify-content: space-between;
+    background-color: #0e2045;
+    margin-bottom: 5px;
+}
+.topRecord .titRecord span,
+.topRecord .conRecord li span{
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    width: 28%;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+}
+.topRecord .titRecord span:nth-child(2),
+.topRecord .conRecord li span:nth-child(2){
+    width: 44%;
+}
+.topRecord .conRecord{}
+.topRecord .conRecord li span{
+    font-size: 12px;
+}
+.topRecord .conRecord li .red{
+    color: #e42929;
+}
+.topRecord .conRecord li .green{
+    color: #39bd23;
+}
+.topRecord .conRecord li .blue{
+    color: #1f7ffa;
+}
+/*互转记录*/
+.memberBox{
+    padding: 10px 5px 20px 5px;
+}
+.memberBox .memberList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+}
+.memberBox .memberList p{
+    flex-grow: 1;
+}
+.memberBox .memberList p span{
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    color: #fff;
+}
+.memberBox .memberList a{
+    display: block;
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 12px;
+    color: #ffffff;
+}
+.memberBox .memberList .red{
+    background-color: #dd4444;
+}
+.memberBox .memberList .green{
+    background-color: #189f24;
+}
+
+/*提现*/
+.withdrawTit{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    overflow: hidden;
+    padding: 15px 0;
+}
+.withdrawTit p{
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+}
+.withdrawTit p:nth-child(1){
+    font-size: 18px;
+    color: #00ffff;
+}
+/*收款设置*/
+.gatherBox{
+    padding: 8px 5px 20px 5px;
+}
+.gatherBox .gatherList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.gatherBox .gatherList img{
+    width: 45px;
+    height: 45px;
+}
+.gatherBox .gatherList .centre{
+    flex-grow: 1;
+    padding-left: 10px;
+}
+.gatherBox .gatherList .centre p{
+    height: 20px;
+    line-height: 20px;
+    font-size: 13px;
+    color: #fff;
+}
+.gatherBox .gatherList .centre .lineHeight{
+    height: 30px;
+    line-height: 30px;
+}
+.gatherBox .gatherList a{
+    display: block;
+    width: 23px;
+    height: 25px;
+    background-image: url("../img/redact.png");
+    background-size: 100% 100%;
+}
+/*我的团队*/
+.teamBox{
+    padding: 10px 5px 20px 5px;
+}
+.teamBox .teamList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    padding: 8px 10px;
+}
+.teamBox .teamList p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    color: #fff;
+}
+.teamBox .teamList p span{}
+/*我的推广*/
+.push_bg{
+    background-image: url("../img/pushBg.png");
+    background-size: 100% 100%;
+}
+.pushBox{
+    margin: 35% auto 0 auto;
+    text-align: center;
+}
+.pushBox i{
+    display: block;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px auto;
+}
+.pushBox i img{
+    width: 100%;
+    height: 100%;
+}
+.pushBox span{
+    font-size: 17px;
+    color: #00ffff;
+}
+/*行业资讯*/
+.informBox{
+    padding: 10px 5px 20px 5px;
+}
+.informBox .informList{
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #0e2045;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.informBox .informList img{
+    width: 120px;
+    height: 87px;
+}
+.informBox .informList .right{
+    margin-left: 10px;
+    flex-grow: 1;
+}
+.informBox .informList .right h5{
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 25px;
+    font-size: 16px;
+    color: #fff;
+    -webkit-line-clamp:1;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+.informBox .informList .right p{
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 20px;
+    font-size: 12px;
+    color: #fff;
+    -webkit-line-clamp:2;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+.informBox .informList .right span{
+    font-size: 13px;
+    color: #fff;
+}
+/*资讯详情*/
+.detailsBox{
+    padding: 10px 10px 20px 10px;
+    color: #fff;
+}
+/*设置*/
+.setBox{
+    margin-top: 50%;
+}
+.setBox a{
+    display: block;
+    border: 1px solid #0a596f;
+    border-radius: 5px;
+    background-color: #0e2045;
+    width: 80%;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto 25px auto;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>C2C</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <h1 class="mui-title">C2C</h1>
+        <a href="order.html" class="head-tit_right">我的订单</a>
+    </header>
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="index.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="enter.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="earnings.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="my.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="c2cHeader">
+                <div class="left" onclick="location.href = 'hangOrder.html'">
+                    <h5>挂单</h5>
+                    <p>STBC买卖中心</p>
+                </div>
+                <div class="right" id="shops">
+                    <h5>成为商家</h5>
+                    <p>立即申请</p>
+                </div>
+            </div>
+            <div class="c2cBox">
+                <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="red">买</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div>
+                <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="green">卖</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div>
+                <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="red">买</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div>
+                <div class="c2cList">
+                    <p>
+                        <span>哈哈收币</span>
+                        <a href="javascript:;" class="green">卖</a>
+                    </p>
+                    <p>
+                        <span>数量: 100USDT</span>
+                        <span class="blue">单价:1.23</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-backdrop c2cMengBan">
+        <div class="tankuang1">
+            <p>需扣除金额(USDT)</p>
+            <h5>0.00</h5>
+            <div class="funBtn">
+                <a href="javscript:;" class="cancel">取消</a>
+                <a href="javscript:;">确定</a>
+            </div>
+        </div>
+        <div class="tankuang2">
+            <p>购买STBC</p>
+            <p>单价:1.76</p>
+            <p>币数:100</p>
+            <p>
+                <span>交易金额:</span>
+                <span>12345</span>
+            </p>
+            <div class="funBtn">
+                <a href="javscript:;" class="cancel">取消</a>
+                <a href="javscript:;">确定</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    // 取消
+    $('.cancel').click(function () {
+        $('.c2cMengBan').hide();
+        $('.tankuang1').hide();
+        $('.tankuang2').hide();
+    })
+    // 商家
+    $('#shops').click(function () {
+        $('.c2cMengBan').show();
+        $('.tankuang1').show();
+    })
+    // 买卖
+    $('.red ,.green').click(function () {
+        $('.c2cMengBan').show();
+        $('.tankuang2').show();
+    })
+
+
+
+</script>
+</body>
+</html>

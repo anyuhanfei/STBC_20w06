@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>收款方式</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">收款方式</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox">
+                <p class="topTitle">收款方式</p>
+                <div class="iptTop">
+                    <input type="text" value="支付宝" readonly>
+                </div>
+                <p class="topTitle">支付宝帐号</p>
+                <div class="iptTop">
+                    <input type="text" id="alipay_account" value="{$user.userdata.alipay_account}" placeholder="请输入支付宝帐号">
+                </div>
+                <p class="topTitle">收款人姓名</p>
+                <div class="iptTop">
+                    <input type="text" id="alipay_username" value="{$user.userdata.alipay_username}" placeholder="请输入收款人姓名">
+                </div>
+                <p class="topTitle">收款人二维码</p>
+                <div class="iptTop">
+                    <label for="alipay_qrcode">
+                        <input type="file" id="alipay_qrcode" class="" onchange="upload(this ,0)" accept="image/*">
+                        {if condition="$user.userdata.alipay_qrcode == ''"}
+                        <img src="/static/index/img/file_img.png" class="img0" alt="">
+                        {else /}
+                        <img src="{$user.userdata.alipay_qrcode}" class="img0" alt="">
+                        {/if}
+                    </label>
+                </div>
+                <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+    function upload(e, i) {
+        var file = e.files[0]
+        if (e.files) {
+            var reader = new FileReader()
+            reader.readAsDataURL(e.files[0]);
+            reader.onload = function (e) {
+                var src = this.result
+                $('.img'+i+'').attr('src', src)
+            }
+        }
+    }
+
+    $(".memberBtn").click(function(){
+        fd = new FormData();
+        fd.append('alipay_account', $("#alipay_account").val());
+        fd.append('alipay_username', $("#alipay_username").val());
+        fd.append("alipay_qrcode", $('#alipay_qrcode')[0].files[0]);
+        $.ajax({
+            url : '/index/me/wallet/update/submit/alipay',
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/me/wallet"
+                    }, 1500);
+                }
+            }
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我的</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="index.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="enter.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="earnings.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="C2C.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="userShow_box">
+                <i><img src="img/logo.png" alt=""></i>
+                <div class="user">
+                    <p>手机号:  12345678901</p>
+                    <p>等级：普通</p>
+                </div>
+            </div>
+            <div class="myContent">
+                <div class="myUser">
+                    <div class="top">
+                        <p>0.00 ≈ 0.00CNY</p>
+                        <p>STBC</p>
+                    </div>
+                    <div class="bot">
+                        <div class="botBox">
+                            <p>0.00</p>
+                            <p>USDT</p>
+                        </div>
+                        <div class="botBox">
+                            <p>0.00</p>
+                            <p>待释放额度(USDT)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="myNav">
+                    <a href="topUp.html">账户充值</a>
+                    <a href="member.html">会员互转</a>
+                    <a href="withdraw.html">提现</a>
+                    <a href="gather.html">收款设置</a>
+                    <a href="team.html">我的团队</a>
+                    <a href="push.html">我的推广</a>
+                    <a href="information.html">行业资讯</a>
+                    <a href="service.html">联系客服</a>
+                    <a href="set.html">设置</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+
+
+</script>
+</body>
+</html>

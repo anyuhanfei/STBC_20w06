@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>订单详情</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">订单详情</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox orderDetaBox">
+                <p class="topTitle">支付方式</p>
+                <div class="iptTop" id="select">请选择支付方式</div>
+                <div class="offline">
+                    <div class="order_1">
+                        <p class="green">出售方：12345678990</p>
+                        <p>数量：20</p>
+                        <p>单价：20CNY</p>
+                        <p>金额：20CNY</p>
+                        <p>下单时间：2020-01-01 11:11:11</p>
+                    </div>
+                    <div class="order_2">
+                        <div class="leftIF">
+                            <p class="green">支付宝</p>
+                            <p>帐号：12345678901</p>
+                            <p>昵称：张三</p>
+                        </div>
+                        <img src="img/banner.png" class="bigImg" alt="">
+                    </div>
+                    <div class="order_2">
+                        <div class="leftIF">
+                            <p class="green">微信</p>
+                            <p>帐号：12345678901</p>
+                            <p>昵称：张三</p>
+                        </div>
+                        <img src="img/banner1.png" class="bigImg" alt="">
+                    </div>
+                    <div class="order_1">
+                        <p class="green">银行卡</p>
+                        <p>银行：中国银行</p>
+                        <p>开户人：张三</p>
+                        <p>银行卡号：1234567890123456789</p>
+                    </div>
+                    <div class="order_1">
+                        <p class="green">支付凭证</p>
+                        <label for="photo">
+                            <input type="file" id="photo" class="" onchange="upload(this ,0)" accept="image/*">
+                            <img src="img/file_img.png" class="img0" alt="">
+                        </label>
+                    </div>
+                    <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+                </div>
+                <div class="usdtBox">
+                    <div class="order_1">
+                        <p class="green">出售方：12345678990</p>
+                        <p>数量：20</p>
+                        <p>单价：20CNY</p>
+                        <p>金额：<span>20CNY ≈ 5442.00USDT</span></p>
+                        <p>下单时间：2020-01-01 11:11:11</p>
+                    </div>
+                    <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-backdrop orderMengBan">
+        <div class="selectList">
+            <p>USDT</p>
+            <p>线下支付</p>
+            <p>取消</p>
+        </div>
+    </div>
+    <div class="mui-backdrop imgMengBan">
+        <div class="imgBox">
+            <img src="" class="imgShow" alt="">
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+
+    function upload(e, i) {
+        var file = e.files[0]
+        if (e.files) {
+            var reader = new FileReader()
+            reader.readAsDataURL(e.files[0]);
+            reader.onload = function (e) {
+                var src = this.result
+                $('.img'+i+'').attr('src', src)
+            }
+        }
+    }
+    $('#select').click(function () {
+        $('.orderMengBan').show();
+        $('.selectList').slideDown()
+    })
+    $('.selectList p').click(function (evn) {
+        evn.preventDefault();
+        var oText = evn.target.innerHTML;
+        switch (oText) {
+            case 'USDT':
+                $('#select').text('USDT');
+                $('.orderMengBan').hide();
+                $('.offline').hide();
+                $('.usdtBox').show();
+                $('.selectList').slideUp();
+                break;
+            case '线下支付':
+                $('#select').text('线下支付');
+                $('.orderMengBan').hide();
+                $('.usdtBox').hide();
+                $('.offline').show();
+                $('.selectList').slideUp();
+                break;
+            case '取消':
+                $('.orderMengBan').hide();
+                $('.selectList').slideUp();
+                break;
+            default:
+                return false
+                break
+        }
+    })
+    $('.bigImg').click(function (evn) {
+        $('.imgMengBan').show();
+        var oSrc = $(this).attr('src')
+        $('.imgShow').attr('src',oSrc)
+    })
+    $('.imgMengBan').click(function (evn) {
+        $('.imgMengBan').hide();
+    })
+
+</script>
+
+</body>
+</html>

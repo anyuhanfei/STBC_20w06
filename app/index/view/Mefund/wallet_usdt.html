@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>收款方式</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">收款方式</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox">
+                <p class="topTitle">收款方式</p>
+                <div class="iptTop">
+                    <input type="text" value="USDT" readonly>
+                </div>
+                <p class="topTitle">USDT地址</p>
+                <div class="iptTop">
+                    <input type="text" id="usdt" value="{$user.userdata.usdt}" placeholder="请输入USDT地址">
+                </div>
+                <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+
+    $(".memberBtn").click(function(){
+        fd = new FormData();
+        fd.append('usdt', $("#usdt").val());
+        $.ajax({
+            url : '/index/me/wallet/update/submit/usdt',
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/me/wallet"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

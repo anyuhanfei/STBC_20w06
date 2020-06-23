@@ -16,4 +16,9 @@ class LogWithdraw extends Model{
         $res = ['审核中', '通过', '驳回'];
         return $res[$data['status']];
     }
+
+    public function getStatusColorAttr($value, $data){
+        $res = ['red', 'green', 'blue'];
+        return $res[$data['status']];
+    }
 }

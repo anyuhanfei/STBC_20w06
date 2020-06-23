@@ -128,6 +128,11 @@ class IdxUser extends Model{
         return $res[$data['is_login']];
     }
 
+    public function getLevelTextAttr($value, $data){
+        $res = ['非节点', '一星节点', '二星节点', '三星节点', '四星节点', '五星节点', '六星节点'];
+        return $res[$data['level']];
+    }
+
     /**
      * 注册会员
      *

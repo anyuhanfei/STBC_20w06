@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>STBC</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav indexHeader">
+        <h1 class="mui-title">STBC</h1>
+    </header>
+    <nav class="mui-bar mui-bar-tab nav_bg">
+        <a href="javascript:;" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon_1"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a href="enter.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_2"></span>
+            <span class="mui-tab-label">入金</span>
+        </a>
+        <a href="earnings.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_3"></span>
+            <span class="mui-tab-label">收益</span>
+        </a>
+        <a href="C2C.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_4"></span>
+            <span class="mui-tab-label">C2C</span>
+        </a>
+        <a href="my.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon_5"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="mui-content mui-scroll-wrapper indexContent">
+        <div class="mui-scroll">
+            <div class="bannerBox">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="img/banner.png" alt=""></div>
+                        <div class="swiper-slide"><img src="img/banner1.png" alt=""></div>
+                        <div class="swiper-slide"><img src="img/banner.png" alt=""></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="noticeBox">
+                <a href="javascript:;" class="noticeBg"></a>
+                <marquee behavior="" direction="">公告消息公告消息公告消息公告消息公告消息</marquee>
+            </div>
+            <div class="echartsBox">
+                <div class="echartsTitle">
+                    <h5>今日币价：0.26548</h5>
+                    <p>
+                        <span>单位:(USDT)</span>
+                        <span>USDT x 7 = CNY</span>
+                    </p>
+                </div>
+                <div class="echartsCont">
+                    <div id="echart" style="width: 100%;height: 160px;"></div>
+                </div>
+            </div>
+            <div class="indexInform">
+                <div class="top">
+                    <h5>|  行业资讯</h5>
+                    <a href="information.html">更多> </a>
+                </div>
+                <div class="bot">
+                    <img src="img/banner.png" alt="">
+                    <div class="right">
+                        <h5>新闻标题</h5>
+                        <p class="rightCont">
+                            <span>什么是主权区块链？主权区块</span>
+                            <a href="details.html">详情</a>
+                        </p>
+                        <p class="rightText">2020-01-01</p>
+                    </div>
+                </div>
+            </div>
+            <div class="coinList">
+                <p class="listHeader">
+                    <span>名称</span>
+                    <span>最新价</span>
+                    <span>涨幅</span>
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            <img src="img/coin.png" alt="">
+                            <span>BTC/USDT</span>
+                        </p>
+                        <p>
+                            <span class="green">0.212</span>
+                            <span>≈￥1.49</span>
+                        </p>
+                        <p class="green">+9.8400%</p>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="img/coin.png" alt="">
+                            <span>BTC/USDT</span>
+                        </p>
+                        <p>
+                            <span class="red">0.212</span>
+                            <span>≈￥1.49</span>
+                        </p>
+                        <p class="red">-9.8400%</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    var mySwiper = new Swiper('.swiper-container', {
+        loop : true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            bulletActiveClass: 'activeSwiper',
+        },
+    })
+
+    var myChart = echarts.init(document.getElementById('echart'));
+    option = {
+        grid: {
+            top:'3%',
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['5/20', '5/21', '5/22', '5/23', '5/24', '5/25', '5/26'],
+            axisLabel:{
+                show:true,
+                textStyle:{
+                    color:'white'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel:{
+                show:true,
+                textStyle:{
+                    color:'white'
+                }
+            }
+        },
+
+        series: [{
+            data: [0, 0.14000, 0.18000, 0.22000, 0.26000, 0.30000],
+            type: 'line',
+            areaStyle: {},
+            itemStyle:{
+                normal:{
+                    color:'#32b16c', //折点颜色
+                    lineStyle:{
+                        color:'#32b16c' //折线颜色
+                    }
+                }
+            }
+        }]
+    };
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>

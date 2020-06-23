@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>挂单</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">挂单</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="orderTabe mui-segmented-control">
+                <a href="#sell" class="mui-control-item mui-active">收币</a>
+                <a href="#deal" class="mui-control-item">出售</a>
+            </div>
+            <div class="mui-content-padded orderBox">
+                <div id="sell" class="mui-control-content mui-active">
+                    <div class="topUpBox">
+                        <p class="topTitle">金额(STBC)</p>
+                        <div class="iptTop">
+                            <input type="text"placeholder="请输入金额">
+                        </div>
+                        <p class="topTitle">单价(CNY)</p>
+                        <div class="iptTop hangGd">
+                            <input type="number" value="0" id="number" readonly>
+                            <div class="numBox">
+                                <i class="add"></i>
+                                <i class="minus"></i>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+                    </div>
+                </div>
+                <div id="deal" class="mui-control-content">
+                    <div class="topUpBox">
+                        <p class="topTitle">金额(STBC)</p>
+                        <div class="iptTop">
+                            <input type="text"placeholder="请输入金额">
+                        </div>
+                        <p class="topTitle">单价(CNY)</p>
+                        <div class="iptTop hangGd">
+                            <input type="number" id="number1" value="0" readonly>
+                            <div class="numBox">
+                                <i class="add1">+</i>
+                                <i class="minus1">-</i>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="buttonKey memberBtn">确认提交</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        history.go(-1)
+    })
+    // 收币
+    $('.add').click(function () {
+        var n = Number($('#number').val())
+        $('#number').val(n+1)
+    });
+    $('.minus').click(function () {
+        var n = Number($('#number').val())
+        if (n > 0) {
+            $('#number').val(n-1)
+        }
+    });
+    // 出售
+    $('.add1').click(function () {
+        var n = Number($('#number1').val())
+        $('#number1').val(n+1)
+    });
+    $('.minus1').click(function () {
+        var n = Number($('#number1').val())
+        if (n > 0) {
+            $('#number1').val(n-1)
+        }
+    });
+
+</script>
+
+</body>
+</html>

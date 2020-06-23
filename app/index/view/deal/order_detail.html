@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>订单详情</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">订单详情</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="topUpBox orderDetaBox">
+                <p class="topTitle">支付方式</p>
+                <div class="iptTop" id="select">请选择支付方式</div>
+                <div class="offline">
+                    <div class="order_1">
+                        <p class="green">对方手机号：{$deal_user.phone}</p>
+                        <p>数量：{$deal.amount}STBC</p>
+                        <p>单价：{$deal.unit_price}CNY</p>
+                        <p>金额：{$deal.amount * $deal.unit_price}CNY</p>
+                        <p>下单时间：{$deal.insert_time}</p>
+                    </div>
+                    <div class="order_2">
+                        <div class="leftIF">
+                            <p class="green">对方支付宝</p>
+                            <p>帐号：{$deal_user.userdata.alipay_account}</p>
+                            <p>昵称：{$deal_user.userdata.alipay_username}</p>
+                        </div>
+                        <img src="{$deal_user.userdata.alipay_qrcode}" class="bigImg" alt="">
+                    </div>
+                    <div class="order_2">
+                        <div class="leftIF">
+                            <p class="green">对方微信</p>
+                            <p>帐号：{$deal_user.userdata.wx_account}</p>
+                            <p>昵称：{$deal_user.userdata.wx_nickname}</p>
+                        </div>
+                        <img src="{$deal_user.userdata.wx_qrcode}" class="bigImg" alt="">
+                    </div>
+                    <div class="order_1">
+                        <p class="green">对方银行卡</p>
+                        <p>银行：{$deal_user.userdata.bank_name}</p>
+                        <p>开户人：{$deal_user.userdata.bank_username}</p>
+                        <p>银行卡号：{$deal_user.userdata.bank_code}</p>
+                    </div>
+                    <div class="order_1">
+                        <p class="green">支付凭证</p>
+                        <label for="photo">
+                            <input type="file" id="photo" class="" onchange="upload(this ,0)" accept="image/*">
+                            {if condition="$deal.pay_prove == ''"}
+                            <img src="/static/index/img/file_img.png" class="img0" alt="">
+                            {else /}
+                            <img src="{$deal.pay_prove}" class="img0" alt="">
+                            {/if}
+                        </label>
+                    </div>
+                    {if condition="$deal.status == 1 && $deal.buy_user_id == $user_id"}
+                    <a href="javascript:;" class="buttonKey memberBtn memberBtn1" data-type="cny">确认提交</a>
+                    {/if}
+                    {if condition="$deal.status == 2 && $deal.sell_user_id == $user_id"}
+                    <a href="javascript:;" class="buttonKey memberBtn memberBtn2" data-type="cny">确认提交</a>
+                    {/if}
+                </div>
+                <div class="usdtBox">
+                    <div class="order_1">
+                        <p class="green">对方手机号：{$deal_user.phone}</p>
+                        <p>数量：{$deal.amount}STBC</p>
+                        <p>单价：{$deal.unit_price}CNY</p>
+                        <p>金额：<?php echo round($deal->amount * $deal->unit_price / $usdt_price, 2); ?>USDT</p>
+                        <p>下单时间：{$deal.insert_time}</p>
+                    </div>
+                    {if condition="$deal.status == 1 && $deal.buy_user_id == $user_id"}
+                    <a href="javascript:;" class="buttonKey memberBtn memberBtn1" data-type="usdt">确认提交</a>
+                    {/if}
+                    {if condition="$deal.status == 2 && $deal.sell_user_id == $user_id"}
+                    <a href="javascript:;" class="buttonKey memberBtn memberBtn2" data-type="usdt">确认提交</a>
+                    {/if}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-backdrop orderMengBan">
+        <div class="selectList">
+            <p>USDT</p>
+            <p>线下支付</p>
+            <p>取消</p>
+        </div>
+    </div>
+    <div class="mui-backdrop imgMengBan">
+        <div class="imgBox">
+            <img src="" class="imgShow" alt="">
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        location.href = "/index/deal/order";
+    })
+
+    function upload(e, i) {
+        var file = e.files[0]
+        if (e.files) {
+            var reader = new FileReader()
+            reader.readAsDataURL(e.files[0]);
+            reader.onload = function (e) {
+                var src = this.result
+                $('.img'+i+'').attr('src', src)
+            }
+        }
+    }
+    if("{$deal.status == 1}"){
+        $('#select').click(function () {
+            $('.orderMengBan').show();
+            $('.selectList').slideDown()
+        })
+        $('.selectList p').click(function (evn) {
+            evn.preventDefault();
+            var oText = evn.target.innerHTML;
+            switch (oText) {
+                case 'USDT':
+                    $('#select').text('USDT');
+                    $('.orderMengBan').hide();
+                    $('.offline').hide();
+                    $('.usdtBox').show();
+                    $('.selectList').slideUp();
+                    break;
+                case '线下支付':
+                    $('#select').text('线下支付');
+                    $('.orderMengBan').hide();
+                    $('.usdtBox').hide();
+                    $('.offline').show();
+                    $('.selectList').slideUp();
+                    break;
+                case '取消':
+                    $('.orderMengBan').hide();
+                    $('.selectList').slideUp();
+                    break;
+                default:
+                    return false
+                    break
+            }
+        })
+    }else{
+        if("{$deal.pay_type == 'CNY'}"){
+            $('#select').text('线下支付');
+            $('.orderMengBan').hide();
+            $('.usdtBox').hide();
+            $('.offline').show();
+            $('.selectList').slideUp();
+        }else{
+            $('#select').text('USDT');
+            $('.orderMengBan').hide();
+            $('.offline').hide();
+            $('.usdtBox').show();
+            $('.selectList').slideUp();
+        }
+    }
+
+    $('.bigImg').click(function (evn) {
+        $('.imgMengBan').show();
+        var oSrc = $(this).attr('src')
+        $('.imgShow').attr('src',oSrc)
+    })
+    $('.imgMengBan').click(function (evn) {
+        $('.imgMengBan').hide();
+    })
+
+    $(".memberBtn1").click(function(){
+        fd = new FormData();
+        fd.append('type', $(this).attr('data-type'));
+        fd.append('deal_id', "{$deal_id}");
+        fd.append("image", $('#photo')[0].files[0]);
+        $.ajax({
+            url: "/index/deal/order/submit/1",
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/deal/order"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+    $(".memberBtn2").click(function(){
+        $.ajax({
+            url: "/index/deal/order/submit/2",
+            type: "post",
+            data: {deal_id: "{$deal_id}"},
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    setTimeout(() => {
+                        location.href = "/index/deal/order"
+                    }, 1500);
+                }
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

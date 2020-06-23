@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>收款设置</title>
+    <link href="/static/index/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/index/css/public.css">
+</head>
+<body>
+<div class="mui-inner-wrap">
+
+    <header class="mui-bar mui-bar-nav head_bg">
+        <a class="mui-icon mui-action-menu mui-icon-arrowleft btn_return"></a>
+        <h1 class="mui-title">收款设置</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper content_bg">
+        <div class="mui-scroll">
+            <div class="gatherBox">
+                <div class="gatherList">
+                    <img src="/static/index/img/zfb.png" alt="">
+                    <div class="centre">
+                        <p>账户:{$user.userdata.alipay_account}</p>
+                        <p>账户名称:{$user.userdata.alipay_username}</p>
+                        <p>账户类型:支付宝</p>
+                    </div>
+                    <a href="/index/me/wallet/alipay"></a>
+                </div>
+                <div class="gatherList">
+                    <img src="/static/index/img/wx.png" alt="">
+                    <div class="centre">
+                        <p>账户:{$user.userdata.wx_account}</p>
+                        <p>账户名称:{$user.userdata.wx_nickname}</p>
+                        <p>账户类型:微信</p>
+                    </div>
+                    <a href="/index/me/wallet/wx"></a>
+                </div>
+                <div class="gatherList">
+                    <img src="/static/index/img/yh.png" alt="">
+                    <div class="centre">
+                        <p>卡号:{$user.userdata.bank_code}</p>
+                        <p>姓名:{$user.userdata.bank_username}</p>
+                        <p>账户类型:银行卡</p>
+                    </div>
+                    <a href="/index/me/wallet/bank"></a>
+                </div>
+                <div class="gatherList">
+                    <img src="/static/index/img/coin.png" alt="">
+                    <div class="centre">
+                        <p class="lineHeight">钱包地址:{$user.userdata.usdt}</p>
+                        <p class="lineHeight">账户类型:USDT</p>
+                    </div>
+                    <a href="/index/me/wallet/usdt"></a>
+                </div>
+                <div class="gatherList">
+                    <img src="/static/index/img/zfb.png" alt="">
+                    <div class="centre">
+                        <p class="lineHeight">钱包地址:{$user.userdata.stbc}</p>
+                        <p class="lineHeight">账户类型:stbc</p>
+                    </div>
+                    <a href="/index/me/wallet/stbc"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/mui.min.js"></script>
+<script src="/static/index/js/code.js"></script>
+<script>
+    mui.init()
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false,
+        bounce: false,
+        deceleration: 0.0005
+    })
+    mui('.mui-bar-tab').on('tap', 'a', function () { document.location.href = this.href; });
+    $('.btn_return').click(function () {
+        location.href = "/index/me";
+    })
+
+</script>
+
+</body>
+</html>

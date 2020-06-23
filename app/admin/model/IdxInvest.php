@@ -12,4 +12,14 @@ class IdxInvest extends Model{
         $res = array('可静态释放', '不可静态释放');
         return $res[$data['has_static']];
     }
+
+    public static function create_data($user_id, $number, $has_static){
+        self::create([
+            'user_id'=> $user_id,
+            'amount'=> $number,
+            'has_static'=> $has_static,
+            'insert_time'=> date('Y-m-d H:i:s', time()),
+            'operation_time'=> date('Y-m-d H:i:s', time())
+        ]);
+    }
 }
