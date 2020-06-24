@@ -25,12 +25,12 @@
                                 <tr>
                                     <th scope="col" width="4%">#</th>
                                     <th scope="col" width="6%">会员id</th>
-                                    <th scope="col" width="8%">会员手机号</th>
-                                    <th scope="col" width="10%">金额</th>
-                                    <th scope="col" width="10%">周期</th>
-                                    <th scope="col" width="5%">静态收益状态</th>
-                                    <th scope="col" width="11%">创建时间</th>
-                                    <th scope="col" width="11%">释放时间</th>
+                                    <th scope="col" width="10%">会员手机号</th>
+                                    <th scope="col" width="12%">金额</th>
+                                    <th scope="col" width="12%">周期</th>
+                                    <th scope="col" width="14%">静态收益状态</th>
+                                    <th scope="col" width="12%">创建时间</th>
+                                    <th scope="col" width="12%">释放时间</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{$vo.id}</td>
                                     <td>{$vo.user_id}</td>
-                                    <td>{$vo->user->phone}</td>
+                                    <td>{$vo.user.phone}</td>
                                     <td>{$vo->amount}</td>
                                     <td>{$vo->period}</td>
                                     <td>{$vo.has_static_text}</td>

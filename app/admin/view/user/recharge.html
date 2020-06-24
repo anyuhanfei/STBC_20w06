@@ -26,12 +26,12 @@
                                     <th scope="col" width="4%">#</th>
                                     <th scope="col" width="6%">会员id</th>
                                     <th scope="col" width="8%">{$user_identity_text}</th>
-                                    <th scope="col" width="10%">金额</th>
+                                    <th scope="col" width="8%">金额</th>
                                     <th scope="col" width="11%">账户</th>
-                                    <th scope="col" width="5%">状态</th>
-                                    <th scope="col" width="11%">申请时间</th>
-                                    <th scope="col" width="11%">审核时间</th>
-                                    <th scope="col" width="6%">充值凭证</th>
+                                    <th scope="col" width="8%">状态</th>
+                                    <th scope="col" width="14%">申请时间</th>
+                                    <th scope="col" width="14%">审核时间</th>
+                                    <th scope="col" width="10%">充值凭证</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -42,6 +42,7 @@
                                     <td>{$vo.user_id}</td>
                                     <td>{$vo->user->phone}</td>
                                     <td>{$vo->amount}</td>
+                                    <td>{$vo->user->userdata->stbc}</td>
                                     <td id="status{$vo.id}">{$vo.status_text}</td>
                                     <td>{$vo.insert_time}</td>
                                     <td>{$vo.operation_time}</td>
@@ -75,15 +76,16 @@
         }, function(){
             layer.closeAll()
             $.ajax({
-                url: "/admin/user/recharge/submit/" + id,
+                url: "/admin/log/recharge/submit/" + id,
                 type: "post",
                 data: {status: status},
                 success: function(data){
-                    if(data.status == 3){
+                    data = JSON.parse(data);
+                    if(data.code == 3){
                         custom_notify('danger', '充值信息审核', data.msg);
-                    }else if(data.status == 2){
+                    }else if(data.code == 2){
                         custom_notify('warning', '充值信息审核', data.msg);
-                    }else if(data.status == 1){
+                    }else if(data.code == 1){
                         custom_notify('success', '充值信息审核', data.msg);
                         $("#button" + id).html('');
                         if(status == 1){

@@ -16,7 +16,7 @@ class LogUserFund extends Model{
     }
 
     public static function fund_type_text(){
-        return ['提现', '提现手续费'];
+        return ['提现', '申请商家', 'C2C', '入金', '静态收益', '总业绩奖', '转账', '充值', '代数奖', '挂单'];
     }
 
     public function getColorAttr($value, $data){

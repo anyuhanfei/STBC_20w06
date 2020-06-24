@@ -8,6 +8,10 @@ class IdxInvest extends Model{
     protected $table ="idx_invest";
     protected $pk = "invest_id";
 
+    public function user(){
+        return $this->hasOne('idx_user', 'user_id', 'user_id');
+    }
+
     public function getHasStaticTextAttr($value, $data){
         $res = array('可静态释放', '不可静态释放');
         return $res[$data['has_static']];

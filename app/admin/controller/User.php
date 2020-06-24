@@ -316,7 +316,7 @@ class User extends Admin{
         $obj = new LogRecharge;
         $user_id = IdxUser::where('phone', $user_account)->value('user_id');
         $obj = ($user_id != '') ? $obj->where('user_id', $user_id) : $obj;
-        $list = $obj->order('status asc, recharge_id desc')->paginate($this->page_number, false,['query'=>request()->param()]);
+        $list = $obj->order('status asc, id desc')->paginate($this->page_number, false,['query'=>request()->param()]);
         $this->many_assign(['list'=> $list, 'user_account'=> $user_account]);
         return View::fetch();
     }
@@ -332,7 +332,7 @@ class User extends Admin{
         if($status != 1 && $status != 2){
             return return_data(2, '', '非法操作');
         }
-        $recharge = LogRecharge::get($id);
+        $recharge = LogRecharge::find($id);
         if(!$recharge){
             return return_data(2, '', '非法操作');
         }
@@ -342,7 +342,7 @@ class User extends Admin{
         $res_one = $recharge->save();
         $res_two = true;
         if($status == 1){
-            $user_fund = IdxUserFund::get($recharge->user_id);
+            $user_fund = IdxUserFund::find($recharge->user_id);
             $user_fund->money += $recharge->amount;
             $res_two = $user_fund->save();
             LogUserFund::create_data($recharge->user_id, $recharge->amount, 'money', '充值', '充值审核通过');
@@ -374,8 +374,11 @@ class User extends Admin{
 
     public function withdraw_submit($id){
         $status = Request::instance()->param('status', 0);
-        $withdraw = LogWithdraw::get($id);
+        $withdraw = LogWithdraw::find($id);
         if(!$withdraw){
+            return return_data(2, '', '非法操作');
+        }
+        if($withdraw->status != 0){
             return return_data(2, '', '非法操作');
         }
         Db::startTrans();
@@ -384,10 +387,10 @@ class User extends Admin{
         $withdraw->operation_time = date("Y-m-d H:i:s", time());
         $res_one = $withdraw->save();
         if($status == 2){ //驳回
-            $user_fund = IdxUserFund::get($withdraw->user_id);
-            $user_fund->money += $withdraw->amount + $withdraw->fee;
+            $user_fund = IdxUserFund::find($withdraw->user_id);
+            $user_fund->stbc += $withdraw->amount + $withdraw->fee;
             $res_two = $user_fund->save();
-            LogUserFund::create_data($withdraw->user_id, $withdraw->amount, 'money', '提现', '提现审核驳回');
+            LogUserFund::create_data($withdraw->user_id, $withdraw->amount + $withdraw->fee, 'money', '提现', '提现审核驳回');
         }
         if($res_one && $res_two){
             LogAdminOperation::create_data('审核提现信息：'.$withdraw->id, 'operation');

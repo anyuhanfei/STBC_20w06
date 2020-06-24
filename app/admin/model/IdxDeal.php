@@ -8,9 +8,9 @@ class IdxDeal extends Model{
     protected $table = "idx_deal";
     protected $pk = "deal_id";
 
-    public function getStaticTextAttr($value, $data){
+    public function getStatusTextAttr($value, $data){
         $res = ['挂卖中', '待付款', '待确认', '已完成'];
-        return $res[$data['static']];
+        return $res[$data['status']];
     }
 
     public function buyuser(){

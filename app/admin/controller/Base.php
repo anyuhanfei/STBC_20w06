@@ -88,11 +88,11 @@ class Base{
      */
     public function where_time($model, $start_time, $end_time){
         if($start_time != '' && $end_time == ''){
-            $model->where('insert_time', '>= time', $start_time);
+            $model->whereTime('insert_time', '>=', $start_time);
         }elseif($start_time == '' && $end_time != ''){
-            $model->where('insert_time', '<= time', $start_time);
+            $model->whereTime('insert_time', '<= time', $start_time);
         }elseif($start_time != '' && $end_time != ''){
-            $model->where('insert_time', 'between time', [$start_time, $end_time]);
+            $model->whereTime('insert_time', 'between time', [$start_time, $end_time]);
         }
         return $model;
     }

@@ -29,9 +29,9 @@
                         <table class="table mt-3">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="4%">#</th>
-                                    <th scope="col" width="6%">买家手机号</th>
-                                    <th scope="col" width="6%">卖家手机号</th>
+                                    <th scope="col" width="10%">#</th>
+                                    <th scope="col" width="8%">买家手机号</th>
+                                    <th scope="col" width="8%">卖家手机号</th>
                                     <th scope="col" width="10%">金额</th>
                                     <th scope="col" width="11%">单价</th>
                                     <th scope="col" width="5%">状态</th>
@@ -45,17 +45,19 @@
                             <tbody>
                                 {volist name="list" id="vo"}
                                 <tr>
-                                    <td>{$vo.id}</td>
-                                    <td>{$vo.buyuser->phone}</td>
-                                    <td>{$vo->selluser->phone}</td>
-                                    <td>{$vo->amount}</td>
-                                    <td>{$vo->unit_price}</td>
+                                    <td>{$vo.deal_id}</td>
+                                    <td>{$vo.buyuser.phone}</td>
+                                    <td>{$vo.selluser.phone}</td>
+                                    <td>{$vo.amount}</td>
+                                    <td>{$vo.unit_price}</td>
                                     <td>{$vo.status_text}</td>
                                     <td>{$vo.insert_time}</td>
                                     <td>{$vo.operation_time}</td>
                                     <td>{$vo.pay_type}</td>
                                     <td>
+                                        {if condition="$vo.pay_prove != ''"}
                                         <img id="image{$vo.deal_id}" src="{$vo.pay_prove}" width="60px" height="60px" onclick="show_image('{$vo.deal_id}')"/>
+                                        {/if}
                                     </td>
                                     <td>
                                     </td>
