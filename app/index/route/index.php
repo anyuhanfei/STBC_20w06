@@ -14,8 +14,12 @@ Route::get('notice/detail/:id', 'index/index/detail');
 Route::get('login', 'index/login/login');
 Route::post('login/submit', 'index/login/login_submit');
 Route::get('forget', 'index/login/forget');
-Route::get('register', 'index/login/register');
+Route::post('forget/submit', 'index/login/forget_submit');
+Route::get('register/[:code]', 'index/login/register');
+Route::post('register/submit', 'index/login/register_submit');
 Route::get('login/out', 'index/login/loginout');
+
+Route::rule('sms/:type', 'index/base/sms');
 
 //C2C
 Route::get('deal', 'index/deal/deal');
