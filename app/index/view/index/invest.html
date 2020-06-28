@@ -90,11 +90,11 @@
                 <div class="iptBox">
                     <input type="text" id="usdt" placeholder="请输入USDT金额,大于下单金额的{$invest_usdt_pct}%">
                 </div>
-                <p class="headline"><span>STBC金额</span></p>
+                <p class="headline"><span>STBC金额</span><span class="boxes" id="formula">转换公式</span></p>
                 <div class="iptBox">
-                    <input type="text" id="stbc" placeholder="自动换算STBC个数">
+                    <input type="text" readonly id="stbc" placeholder="自动换算STBC个数">
                 </div>
-                <p class="headline"><span class="red">STBC个数：{$user->userfund->stbc}</span></p>
+                <p class="headline"><span class="red">STBC余额：{$user->userfund->stbc} STBC  ≈  <?php echo round($user->userfund->stbc * $stbc / $usdt, 2); ?>USDT</span></p>
                 <a href="javascript:;" class="buttonKey">确认提交</a>
             </div>
         </div>
@@ -118,12 +118,25 @@
             return;
         }
         $("#numSum").val(this.value)
+        $("#usdt").val('')
+        $("#stbc").val('')
+        show_stbc()
     })
 
     $("#usdt").change(function(){
-        var usdt = parseInt($("#usdt").val())
-        $("#stbc").val(((($("#numSum").val() - usdt) / parseFloat("{$b}")).toFixed(2)));
+        if(parseInt($("#usdt").val()) > parseInt($("#numSum").val())){
+            $("#usdt").val(parseInt($("#numSum").val()))
+        }
+        show_stbc()
     })
+
+    function show_stbc(){
+        var usdt = parseInt($("#usdt").val())
+        var numSum = parseInt($("#numSum").val())
+        if(usdt > 0 && numSum > 0){
+            $("#stbc").val((((numSum - usdt) / parseFloat("{$b}")).toFixed(2)));
+        }
+    }
 
     $(".buttonKey").click(function(){
         $.ajax({
@@ -142,6 +155,9 @@
         })
     })
 
+    $("#formula").click(function(){
+        mui.alert('所需补全的USDT金额 * USDT兑换CNY比例 / STBC兑换CNY比例', 'USDT兑换STBC公式');
+    })
 </script>
 </body>
 </html>

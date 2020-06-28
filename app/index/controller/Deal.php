@@ -238,4 +238,35 @@ class Deal extends Index{
             return return_data(2, '', '操作失败');
         }
     }
+
+    public function order_down($deal_id){
+        $deal_id = Request::instance()->param('deal_id', '');
+        $deal = IdxDeal::find($deal_id);
+        if(!$deal){
+            return return_data(2, '', '非法操作');
+        }
+        if($deal->buy_user_id != $this->user_id && $deal->sell_user_id != $this->user_id){
+            return return_data(2, '', '非法操作');
+        }
+        if($deal->status != 0){
+            return return_data(2, '', '非法操作');
+        }
+        Db::startTrans();
+        $res_one = true;
+        if($deal->sell_user_id == $this->user_id){
+            //退钱
+            $sell_user_fund = IdxUserFund::find($this->user_id);
+            $sell_user_fund->stbc += $deal->amount;
+            $res_one = $sell_user_fund->save();
+            LogUserFund::create_data($this->user_id, $deal->amount, 'stbc', 'C2C', '挂单下架, 返还STBC');
+        }
+        $res_two = $deal->delete();
+        if($res_one && $res_two){
+            Db::commit();
+            return return_data(1, '', '下架成功');
+        }else{
+            Db::rollback();
+            return return_data(2, '', '下架失败');
+        }
+    }
 }

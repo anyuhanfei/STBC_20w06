@@ -15,7 +15,7 @@
     <div class="mui-content mui-scroll-wrapper content_bg">
         <div class="loginImg">
             <i class="returnBtn"></i>
-            <img src="/static/index/img/logo.png" alt="">
+            <img src="/static/index/img/logo.png" alt="" onclick="location.href='/index/login'">
         </div>
         <div class="loginIpt">
             <label>
@@ -74,6 +74,8 @@
                     if(data.code == 2){
                         clearInterval(countDown)
                         $(that).text(get_code)
+                    }else{
+                        $("#smscode").val(data.data)
                     }
                 }
             })

@@ -26,13 +26,13 @@
                 <div id="sell" class="mui-control-content mui-active">
                     {volist name="list" id="vo"}
                     {if condition="$vo.status == 0"}
-                    <div class="orderList">
+                    <div class="orderList" id="order{$vo.deal_id}">
                         <div class="orderTop">
                             <p>
                                 <span>{$vo.deal_id}({if condition="$vo.buy_user_id==0"}出售{else /}收购{/if})</span>
                                 <span>数量：{$vo.amount}STBC</span>
                             </p>
-                            <a href="javascript:;">下架</a>
+                            <a href="javascript:;" onclick="order_down('{$vo.deal_id}')">下架</a>
                         </div>
                         <p class="orderBot">
                             <span>{$vo.insert_time}</span>
@@ -114,6 +114,19 @@
         location.href = "/index/deal";
     })
 
+    function order_down(deal_id){
+        $.ajax({
+            url: "/index/deal/order/down/" + deal_id,
+            type: "post",
+            success: function(data){
+                data = JSON.parse(data)
+                mui.toast(data.msg);
+                if(data.code == 1){
+                    $("#order" + deal_id).html('');
+                }
+            }
+        })
+    }
 </script>
 
 </body>

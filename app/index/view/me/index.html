@@ -46,7 +46,7 @@
             <div class="myContent">
                 <div class="myUser">
                     <div class="top">
-                        <p>{$user.userfund.stbc} ≈ {$user.userfund.stbc * $stbc}CNY</p>
+                        <p>{$user.userfund.stbc} ≈ <?php echo round($user->userfund->stbc * $stbc / $usdt, 2); ?>USDT</p>
                         <p>STBC</p>
                     </div>
                     <div class="bot">

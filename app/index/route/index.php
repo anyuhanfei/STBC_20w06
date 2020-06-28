@@ -31,6 +31,7 @@ Route::get('deal/order', 'index/deal/order');
 Route::get('deal/order/detail/:deal_id', 'index/deal/order_detail');
 Route::post('deal/order/submit/1', 'index/deal/order_1');
 Route::post('deal/order/submit/2', 'index/deal/order_2');
+Route::post('deal/order/down/:deal_id', 'index/deal/order_down');
 
 //我的
 Route::get('me', 'index/me/index');

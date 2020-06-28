@@ -104,6 +104,10 @@ class Index extends Base{
         View::assign('b', $b);
         $invest_usdt_pct = SysSetting::where('sign', 'invest_usdt_pct')->value('value');
         View::assign('invest_usdt_pct', $invest_usdt_pct);
+        $stbc = AutoValue::where('id', 4)->value('hight_number');
+        View::assign('stbc', $stbc);
+        $usdt = AutoValue::where('id', 3)->value('hight_number');
+        View::assign('usdt', $usdt);
         return View::fetch();
     }
 

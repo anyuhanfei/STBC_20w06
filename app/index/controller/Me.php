@@ -21,6 +21,8 @@ class Me extends Index{
     public function index(){
         $stbc = AutoValue::where('id', 4)->value('hight_number');
         View::assign('stbc', $stbc);
+        $usdt = AutoValue::where('id', 3)->value('hight_number');
+        View::assign('usdt', $usdt);
         return View::fetch();
     }
 
