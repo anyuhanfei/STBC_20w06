@@ -51,3 +51,23 @@ if eth_usdt_select_sql_res:
     eth_usdt_update_res = cursor.execute(eth_usdt_update_sql)
     if eth_usdt_update_res == 1:
         conn.commit()
+
+
+usdt2cny_url = "https://www.hbg.com/-/x/general/exchange_rate/list?r=86xktl2lldf"
+
+try:
+    res = requests.get(usdt2cny_url, timeout=10)
+    if res.status_code == 200:
+        content = json.loads(res.content.decode())
+        if content != {}:
+            for i in content['data']:
+                if i['name'] == 'usdt_cny':
+                    usdt2cny_sql = "update auto_value set hight_number='%s', insert_time='%s' where coin='%s'"
+                    usdt2cny_sql = usdt2cny_sql % (i['rate'], time.time(), 'USDT')
+                    usdt2cny_res = cursor.execute(usdt2cny_sql)
+                    if usdt2cny_res == 1:
+                        conn.commit()
+        else:
+            print('获取币种兑换人民币汇率:汇率获取失败')
+except BaseException as e:
+    print('url:%s:%s' % (usdt2cny_url, e))
