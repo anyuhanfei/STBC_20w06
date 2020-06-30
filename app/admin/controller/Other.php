@@ -45,6 +45,24 @@ class Other extends Admin{
         return View::fetch();
     }
 
+    public function invest_freeze(){
+        $id = Request::instance()->param('id', 0);
+        $invest = IdxInvest::find($id);
+        if(!$invest){
+            return return_data(2, '', '非法操作');
+        }
+        $invest->has_static = $invest->has_static == 0 ? 1 : 0;
+        $res = $invest->save();
+        if($res){
+            if($res){
+                LogAdminOperation::create_data('修改入金静态是否状态', 'operation');
+                return return_data(1, '', '操作成功');
+            }else{
+                return return_data(3, '', '操作失败，请联系管理员');
+            }
+        }
+    }
+
     /**
      * 价格
      *

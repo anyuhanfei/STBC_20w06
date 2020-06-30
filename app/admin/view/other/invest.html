@@ -37,15 +37,17 @@
                             <tbody>
                                 {volist name="list" id="vo"}
                                 <tr>
-                                    <td>{$vo.id}</td>
+                                    <td>{$vo.invest_id}</td>
                                     <td>{$vo.user_id}</td>
                                     <td>{$vo.user.phone}</td>
                                     <td>{$vo->amount}</td>
                                     <td>{$vo->period}</td>
-                                    <td>{$vo.has_static_text}</td>
+                                    <td id="status{$vo.invest_id}">{$vo.has_static_text}</td>
                                     <td>{$vo.insert_time}</td>
                                     <td>{$vo.operation_time}</td>
                                     <td>
+                                        <button id="freeze{$vo.invest_id}" class="btn btn-warning btn-xs" onclick="freeze('{$vo.invest_id}')" {if condition="$vo.has_static == 0"}style="display: none;"{/if}>冻结</button>
+                                        <button id="unfreeze{$vo.invest_id}" class="btn btn-primary btn-xs" onclick="freeze('{$vo.invest_id}')" {if condition="$vo.has_static == 1"}style="display: none;"{/if}>解冻</button>
                                     </td>
                                 </tr>
                                 {/volist}
@@ -62,10 +64,36 @@
 
 {block name="custom_js"}
 <script>
-
     $("#from_close").click(function(){
         $("#user_account").val('');
         $("#search_submit").click();
     })
+
+    function freeze(id){
+        $.ajax({
+            url: "/admin/invest/freeze",
+            type: "post",
+            data: {id: id},
+            success: function(data){
+                data = JSON.parse(data);
+                if(data.code == 3){
+                    custom_notify('danger', '入金操作', data.msg);
+                }else if(data.code == 2){
+                    custom_notify('warning', '入金操作', data.msg);
+                }else if(data.code == 1){
+                    custom_notify('success', '入金操作', data.msg);
+                    if($("#status" + id).html() == '可静态释放'){
+                        $("#status" + id).html('不可静态释放')
+                        $("#freeze" + id).hide();
+                        $("#unfreeze" + id).show();
+                    }else{
+                        $("#status" + id).html('可静态释放')
+                        $("#freeze" + id).show();
+                        $("#unfreeze" + id).hide();
+                    }
+                }
+            }
+        })
+    }
 </script>
 {/block}

@@ -142,12 +142,12 @@ class Index extends Base{
      * @param integer $amount 应得的USDT金额
      * @return void
      */
-    public function earnings($user_id, $type, $amount=0){
+    public static function earnings($user_id, $type, $amount=0){
         $stbc_amount = 0;
         $user_fund = IdxUserFund::find($user_id);
         if($user_fund->usdt > 0 && $amount > 0){
             $usdt2cny = AutoValue::where('id', 3)->value('hight_number');
-            $stbc2cny = IdxStbcPrice::where('insert_time', '<=', time())->value('unit_price');
+            $stbc2cny = AutoValue::where('id', 4)->value('hight_number');
             if($user_fund->usdt >= $amount){
                 $stbc_amount = $amount * $usdt2cny / $stbc2cny;
                 $user_fund->usdt -= $amount;

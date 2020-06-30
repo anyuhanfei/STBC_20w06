@@ -47,18 +47,18 @@ class Fund extends Index{
         $progressive_total = SysSetting::where('sign', 'progressive_total')->value('value');
         $user_count = IdxUserCount::where('user_id', $this->user_id)->find();
         $has_static = 1;  //正常情况
-        if($invest_maximum <= $user_count->invest_count){ // 超出
+        if(intval($invest_maximum) <= $user_count->invest_count){ // 超出
             $has_static = 0;
         }else{
-            if($progressive_total >= $user_count->invest_sum){ //全部超出
-                $has_static = 0;
-            }elseif($progressive_total >= ($user_count->invest_sum + $number)){ //本次入金后超出
+            if(intval($progressive_total) < intval($user_count->invest_sum + $number)){ //本次入金后超出
                 $has_static = 2;
+            }elseif(intval($progressive_total) <= intval($user_count->invest_sum)){ //全部超出
+                $has_static = 0;
             }
         }
         if($has_static == 2){ //本次入金后超出, 将超出部分分离
             IdxInvest::create_data($this->user_id, $user_count->invest_sum + $number - $progressive_total, 0);
-            IdxInvest::create_data($this->user_id, $number - $user_count->invest_sum + $number - $progressive_total, 1);
+            IdxInvest::create_data($this->user_id, $number - ($user_count->invest_sum + $number - $progressive_total), 1);
         }else{
             IdxInvest::create_data($this->user_id, $number, $has_static);
         }
@@ -82,15 +82,15 @@ class Fund extends Index{
         $invest_earnings = SysSetting::where('sign', 'invest_earnings')->value('value'); //见点奖
         while($top_id != 0 && $level <= 8){
             //团队业绩
-            $top_user_count = IdxUserCount::get($top_id);
+            $top_user_count = IdxUserCount::find($top_id);
             $top_user_count->team_performance += $number;
             $top_user_count->save();
-            $top_user = IdxUser::get($top_id);
+            $top_user = IdxUser::find($top_id);
             //节点升级
             $this->level_up($top_id);
             //见点奖
             if($level <= 8 && $top_user_count->invest_sum > 0){
-                $this->earnings($top_id, '见点奖', $number * $invest_earnings * 0.01);
+                self::earnings($top_id, '见点奖', $number * $invest_earnings * 0.01);
             }
             //下次循环
             $top_id = $top_user->top_id;
@@ -101,14 +101,14 @@ class Fund extends Index{
 
     //升级判断，顺带更新大小区，和业绩奖计算问题
     private function level_up($top_id){
-        $user = IdxUser::get($top_id);
+        $user = IdxUser::find($top_id);
         //获取所有下级，并按团队业绩分为大小区
         $down_user = IdxUser::where('top_id', $top_id)->select();
         if($down_user){
             $max_zone = array('user_id'=> 0, 'team_performance'=> 0);
             $min_zone = array();
             foreach($down_user as $v){
-                $v_count = IdxUserCount::get($v->user_id);
+                $v_count = IdxUserCount::find($v->user_id);
                 if($v_count->team_performance > $max_zone['team_performance']){
                     if($max_zone['user_id'] != 0){
                         $min_zone[] = array('user_id'=> $max_zone['user_id'], 'team_performance'=> $max_zone['team_performance']);
@@ -127,7 +127,7 @@ class Fund extends Index{
                 $min_zone_all += $v['team_performance'];
             }
         }
-        $user_count = IdxUserCount::get($top_id);
+        $user_count = IdxUserCount::find($top_id);
         $user_count->small_area_number = $min_zone_all;
         $user_count->big_area_number = $max_zone['team_performance'];
         if($min_zone_all <= $max_zone['team_performance']){ //谁小按谁
@@ -204,15 +204,15 @@ class Fund extends Index{
                     $once_level_four = true;
                     while($top_id != 0){
                         //代数奖
-                        $top = IdxUser::get($top_id);
+                        $top = IdxUser::find($top_id);
                         if($top->is_earnings == 0){ //如果上级收益冻结，不获取收益
                             $top_id = $top->top_id;
                             $i += 1;
                             $down_user_id = $top->user_id;
                             continue;
                         }
-                        $top_fund = IdxUserFund::get($top_id);
-                        $top_count = IdxUserCount::get($top_id);
+                        $top_fund = IdxUserFund::find($top_id);
+                        $top_count = IdxUserCount::find($top_id);
                         $sql = "SELECT COUNT(*) as c FROM (SELECT COUNT(user_id) FROM idx_invest WHERE user_id IN (SELECT user_id FROM idx_user WHERE top_id=" . $top_id . ") GROUP BY user_id) AS a";
                         $down_user_count = Db::query($sql);
                         if($i <= 8 && $down_user_count[0]['c'] >= $i && $top_count->invest_sum > 0){

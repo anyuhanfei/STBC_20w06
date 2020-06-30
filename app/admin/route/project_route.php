@@ -8,5 +8,6 @@ Route::rule('log/withdraw/submit/:id', 'user/withdraw_submit');
 
 Route::rule('deal', 'other/deal');
 Route::rule('invest', 'other/invest');
+Route::rule('invest/freeze', 'other/invest_freeze');
 Route::rule('price', 'other/price');
 Route::rule('price/add', 'other/price_add');

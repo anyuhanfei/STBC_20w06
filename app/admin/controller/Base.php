@@ -4,6 +4,9 @@ namespace app\admin\controller;
 use think\facade\Env;
 use think\facade\Session;
 use think\facade\View;
+use think\facade\Request;
+
+use app\admin\model\IdxUser;
 
 
 class Base{
@@ -75,6 +78,27 @@ class Base{
     public function many_assign($assign_array = array()){
         foreach($assign_array as $k => $v){
             View::assign($k, $v);
+        }
+    }
+
+    public function user_add_submit(){
+        $nickname = Request::instance()->param('nickname', '');
+        $user_identity = Request::instance()->param('user_identity', '');
+        $password = Request::instance()->param('password', '');
+        $level_password = Request::instance()->param('level_password', '');
+        $top_user_identity = Request::instance()->param('top_user_identity', '');
+        $validate = new \app\admin\validate\User;
+        $validate_data = ['nickname'=> $nickname, 'user_identity'=> $user_identity, 'password'=> $password, 'level_password'=> $level_password, 'top_user_identity'=> $top_user_identity];
+        if(!$validate->scene('add')->check($validate_data)){
+            return return_data(2, '', $validate->getError());
+        }
+        $top_user_id = IdxUser::field('user_id')->where($this->user_identity, $top_user_identity)->value('user_id');
+        $top_user_id = $top_user_id == null ? 0 : $top_user_id;
+        $res = IdxUser::create_data($user_identity, $password, $top_user_id, $nickname, $level_password);
+        if($res){
+            return return_data(1, '', '添加成功');
+        }else{
+            return return_data(2, '', '添加失败，请联系管理员');
         }
     }
 

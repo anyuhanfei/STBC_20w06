@@ -13,7 +13,7 @@ class IdxInvest extends Model{
     }
 
     public function getHasStaticTextAttr($value, $data){
-        $res = array('可静态释放', '不可静态释放');
+        $res = array('不可静态释放', '可静态释放');
         return $res[$data['has_static']];
     }
 
