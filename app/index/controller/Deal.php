@@ -13,6 +13,7 @@ use app\admin\model\SysSetting;
 use app\admin\model\IdxUserFund;
 use app\admin\model\LogUserFund;
 use app\admin\model\AutoValue;
+use app\admin\model\LogShopApply;
 
 
 class Deal extends Index{
@@ -29,15 +30,22 @@ class Deal extends Index{
         if($user_fund->money < $shop_usdt){
             return return_data(2, '', 'USDT余额不足');
         }
+        if(LogShopApply::where('user_id', $this->user_id)->where('status', 0)->find()){
+            return return_data(2, '', '申请中, 请耐心等待');
+        }
+        if($this->user->is_shop == 1){
+            return return_data(2, '', '已成为商家, 请勿重复申请');
+        }
         Db::startTrans();
         $user_fund->money -= $shop_usdt;
         $res = $user_fund->save();
-        $this->user->is_shop = 1;
-        $this->user->save();
-        if($res){
+        // $this->user->is_shop = 1;
+        // $this->user->save();
+        $res_two = LogShopApply::create(['user_id'=> $this->user_id, 'amount'=> $shop_usdt, 'insert_time'=> date("Y-m-d H:i:s", time())]);
+        if($res && $res_two){
             Db::commit();
             LogUserFund::create_data($this->user_id, '-'.$shop_usdt, 'money', '申请商家', '提交商家保证金');
-            return return_data(1, '', '申请商家成功');
+            return return_data(1, '', '申请商家成功, 请等待审核');
         }else{
             Db::rollback();
             return return_data(2, '', '申请商家失败');
@@ -125,6 +133,8 @@ class Deal extends Index{
         }
         if($res_one && $res_two){
             Db::commit();
+            //给对方发送短信提示
+            $this->send_sms(($deal->sell_user_id == $this->user_id) ? $deal->buyuser->phone : $deal->selluser->phone);
             return return_data(1, '', '交易开始');
         }else{
             Db::rollback();

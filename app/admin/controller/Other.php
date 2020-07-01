@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\facade\View;
 use think\facade\Session;
 use think\facade\Request;
+use think\facade\Db;
 
 use app\admin\controller\Admin;
 
@@ -12,6 +13,9 @@ use app\admin\model\IdxUser;
 use app\admin\model\IdxInvest;
 use app\admin\model\IdxStbcPrice;
 use app\admin\model\LogAdminOperation;
+use app\admin\model\LogShopApply;
+use app\admin\model\IdxUserFund;
+use app\admin\model\LogUserFund;
 
 
 class Other extends Admin{
@@ -94,6 +98,54 @@ class Other extends Admin{
             return return_data(1, array($amount, $time), '添加成功');
         }else{
             return return_data(3, '', '添加失败，请联系管理员');
+        }
+    }
+
+    /**
+     * 商家审核
+     *
+     * @return void
+     */
+    public function shop_apply(){
+        $user_account = Request::instance()->param('user_account', '');
+        $obj = new LogShopApply;
+        $user_id = IdxUser::where('phone', $user_account)->value('user_id');
+        $obj = ($user_id != '') ? $obj->where('user_id', $user_id) : $obj;
+        $list = $obj->order('status asc, id desc')->paginate($this->page_number, false,['query'=>request()->param()]);
+        $this->many_assign(['list'=> $list, 'user_account'=> $user_account]);
+        return View::fetch();
+    }
+
+    public function shop_apply_submit($id){
+        $status = Request::instance()->param('status', 0);
+        $obj = LogShopApply::find($id);
+        if(!$obj){
+            return return_data(2, '', '非法操作');
+        }
+        if($obj->status != 0){
+            return return_data(2, '', '非法操作');
+        }
+        Db::startTrans();
+        $obj->status = $status;
+        $obj->operation_time = date("Y-m-d H:i:s", time());
+        $res_one = $obj->save();
+        if($status == 2){ //驳回
+            $user_fund = IdxUserFund::find($obj->user_id);
+            $user_fund->money += $obj->amount;
+            $res_two = $user_fund->save();
+            LogUserFund::create_data($obj->user_id, $obj->amount, 'money', '申请商家', '申请驳回,返还保证金');
+        }else{
+            $user = IdxUser::find($obj->user_id);
+            $user->is_shop = 1;
+            $res_two = $user->save();
+        }
+        if($res_one && $res_two){
+            LogAdminOperation::create_data('审核提现信息：'.$obj->id, 'operation');
+            Db::commit();
+            return return_data(1, '', '审核成功');
+        }else{
+            Db::rollback();
+            return return_data(3, '', '审核失败，请联系管理员');
         }
     }
 }

@@ -44,12 +44,16 @@ class Base{
         return return_data(1, '', '发送成功');
     }
 
-    public function send_sms($phone, $code){
+    public function send_sms($phone, $code=''){
         $post_data = array();
         $post_data['userid'] = 3865;
         $post_data['account'] = 'qx4877';
         $post_data['password'] = '20200525';
-        $post_data['content'] = '【STBC】您的短信验证码为：' . $code;
+        if($code != ''){
+            $post_data['content'] = '【STBC】您的短信验证码为：' . $code;
+        }else{
+            $post_data['content'] = '【STBC】您有新的订单，请及时查看';
+        }
         $post_data['mobile'] = $phone;
         $post_data['sendtime'] = date("Y-m-d H:i:s", time());
         $url='http://120.25.105.164:8888/sms.aspx?action=send';

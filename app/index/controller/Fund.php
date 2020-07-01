@@ -89,9 +89,9 @@ class Fund extends Index{
             //节点升级
             $this->level_up($top_id);
             //见点奖
-            if($level <= 8 && $top_user_count->invest_sum > 0){
-                self::earnings($top_id, '见点奖', $number * $invest_earnings * 0.01);
-            }
+            // if($level <= 8 && $top_user_count->invest_sum > 0){
+            //     self::earnings($top_id, '见点奖', $number * $invest_earnings * 0.01);
+            // }
             //下次循环
             $top_id = $top_user->top_id;
             $level += 1;
@@ -191,7 +191,7 @@ class Fund extends Index{
                         $earnings = $user_fund->usdt;
                         $user_fund->usdt = 0;
                     }
-                    $earnings = $earnings * AutoValue::where('id', 3)->value('hight_number') / AutoValue::where('id', 4)->value('hight_number');  //今日返的钱stbc
+                    $earnings = round($earnings * AutoValue::where('id', 3)->value('hight_number') / AutoValue::where('id', 4)->value('hight_number'), 2);  //今日返的钱stbc
                     $user_fund->stbc += $earnings;
                     $user_fund->save();
                     LogUserFund::create_data($user_id, $earnings, 'stbc', '静态收益', '静态收益');
@@ -232,13 +232,13 @@ class Fund extends Index{
                                     $once_level_four = false;
                                 }
                                 $yield_earnings = $earnings * $j * 0.01;
-                                $top_fund->money += $yield_earnings;
+                                $top_fund->stbc += $yield_earnings;
                                 //返佣最高等级
                                 if($top->level > $fan_level){
                                     $fan_level = $top->level;
                                 }
                                 if($yield_earnings > 0){
-                                    LogUserFund::create_data($user_id, $yield_earnings, 'stbc', '总业绩奖', '静态收益');
+                                    LogUserFund::create_data($user_id, $yield_earnings, 'stbc', '总业绩奖', '总业绩奖');
                                 }
                             }
                         }else{

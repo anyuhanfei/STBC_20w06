@@ -1,0 +1,98 @@
+{extend name="base" /}
+
+{block name="content"}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">商家申请管理</div>
+                        <div class="card-sub text-warning">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-inline" role="form" action="" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user_account" id="user_account" value="{$user_account}" placeholder="会员手机号" style="width: 150px;">
+                            </div>
+                            <button type="submit" class="btn btn-default" id="search_submit">搜索</button>&nbsp&nbsp
+                            <button type="button" class="btn btn-default" id="from_close">清空</button>
+                        </form>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="6%">#</th>
+                                    <th scope="col" width="8%">会员id</th>
+                                    <th scope="col" width="15%">手机号</th>
+                                    <th scope="col" width="10%">保证金(USDT)</th>
+                                    <th scope="col" width="10%">状态</th>
+                                    <th scope="col" width="17%">申请时间</th>
+                                    <th scope="col" width="17%">审核时间</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.user_id}</td>
+                                    <td>{$vo->user->phone}</td>
+                                    <td>{$vo->amount}</td>
+                                    <td id="status{$vo.id}">{$vo.status_text}</td>
+                                    <td>{$vo.insert_time}</td>
+                                    <td>{$vo.operation_time}</td>
+                                    <td id="button{$vo.id}">
+                                        {if condition="$vo.status == 0"}
+                                        <button class="btn btn-success btn-xs" onclick="astatus({$vo.id},'1')">通过</button>
+                                        <button class="btn btn-success btn-xs" onclick="astatus({$vo.id},'2')">驳回</button>
+                                        {/if}
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                        {$list->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="custom_js"}
+<script>
+    function astatus(id, status){
+        $.ajax({
+            url: "/admin/log/shop/apply/submit/" + id,
+            type: "post",
+            data: {status: status},
+            success: function(data){
+                data = JSON.parse(data)
+                if(data.code == 3){
+                    custom_notify('danger', '商家申请信息审核', data.msg);
+                }else if(data.code == 2){
+                    custom_notify('warning', '商家申请信息审核', data.msg);
+                }else if(data.code == 1){
+                    custom_notify('success', '商家申请信息审核', data.msg);
+                    $("#button" + id).html('');
+                    if(status == 1){
+                        var status_text = '通过';
+                    }else{
+                        var status_text = '驳回';
+                    }
+                    $("#status" + id).html(status_text);
+                    layer.closeAll();
+                }
+            }
+        })
+    }
+
+    $("#from_close").click(function(){
+        $("#user_account").val('');
+        $("#search_submit").click();
+    })
+</script>
+{/block}
