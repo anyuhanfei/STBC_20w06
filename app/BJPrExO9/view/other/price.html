@@ -1,0 +1,49 @@
+{extend name="base" /}
+
+
+{block name="custom_css"}
+<link rel="stylesheet" href="/static/dcalendar.picker/dcalendar.picker.css">
+{/block}
+
+{block name="content"}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">STBC价格管理</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-inline">
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="48%">日期</th>
+                                    <th scope="col" width="48%">金额</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                {volist name="list" id="c"}
+                                <tr>
+                                    <td>{$c.insert_time}</td>
+                                    <td>{$c.unit_price}CNY</td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                        {$list->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="custom_js"}
+<script>
+
+</script>
+{/block}
