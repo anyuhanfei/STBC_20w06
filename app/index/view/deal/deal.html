@@ -148,8 +148,8 @@
     $('.red ,.green').click(function () {
         var amount = $(this).attr('data-amount')
         var price = $(this).attr('data-price');
-        $("#alert_price").html('单价:' + amount)
-        $("#alert_amount").html('币数:' + price)
+        $("#alert_price").html('单价:' + price)
+        $("#alert_amount").html('币数:' + amount)
         $("#alert_all_price").html('交易金额:' + (price * amount).toFixed(2))
         $("#deal_q").attr('data-deal_id', $(this).attr('data-deal_id'))
         $('.c2cMengBan').show();

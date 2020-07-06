@@ -21,6 +21,22 @@ class Deal extends Index{
         $deal = IdxDeal::where('status', 0)->order('insert_time desc')->select();
         View::assign('deal', $deal);
         View::assign('shop_usdt', SysSetting::where('sign', 'shop_usdt')->value('value'));
+        $deal1 = IdxDeal::where('status', 1)->select();
+        foreach($deal1 as $v){
+            if((strtotime($v->operation_time) + (60 * 30)) < time()){
+                Db::startTrans();
+                $user_fund = IdxUserFund::find($v->sell_user_id);
+                $user_fund->stbc += $deal->amount;
+                $res_one = $user_fund->save();
+                $res_two = $v->delete();
+                LogUserFund::create_data($v->sell_user_id, $deal->amount, 'stbc', 'C2C', '交易超时, 返还STBC');
+                if($res_one && $res_two){
+                    Db::commit();
+                }else{
+                    Db::rollback();
+                }
+            }
+        }
         return View::fetch();
     }
 
