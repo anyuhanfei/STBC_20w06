@@ -76,31 +76,47 @@
         history.go(-1)
     })
     // 收币
-    $('.add').click(function () {
-        var n = parseFloat($('#buy_number').attr('data-n'))
-        var pct = parseInt($('#buy_number').attr('data-pct'))
-        $('#buy_number').attr('data-pct', pct + 1)
-        $('#buy_number').val((n * (1 + (pct + 1) * 0.01)).toFixed(2))
-    });
+    // $('.add').click(function () {
+    //     var n = parseFloat($('#buy_number').attr('data-n'))
+    //     var pct = parseInt($('#buy_number').attr('data-pct'))
+    //     $('#buy_number').attr('data-pct', pct + 1)
+    //     $('#buy_number').val((n * (1 + (pct + 1) * 0.01)).toFixed(2))
+    // });
+    // $('.minus').click(function () {
+    //     var n = parseFloat($('#buy_number').attr('data-n'))
+    //     var pct = parseInt($('#buy_number').attr('data-pct'))
+    //     $('#buy_number').attr('data-pct', pct - 1)
+    //     $('#buy_number').val((n * (1 + (pct - 1) * 0.01)).toFixed(2))
+    // });
+    // // 出售
+    // $('.add1').click(function () {
+    //     var n = parseFloat($('#sell_number').attr('data-n'))
+    //     var pct = parseInt($('#sell_number').attr('data-pct'))
+    //     $('#sell_number').attr('data-pct', pct + 1)
+    //     $('#sell_number').val((n * (1 + (pct + 1) * 0.01)).toFixed(2))
+    // });
+    // $('.minus1').click(function () {
+    //     var n = parseFloat($('#sell_number').attr('data-n'))
+    //     var pct = parseInt($('#sell_number').attr('data-pct'))
+    //     $('#sell_number').attr('data-pct', pct - 1)
+    //     $('#sell_number').val((n * (1 + (pct - 1) * 0.01)).toFixed(2))
+    // });
+
+    $(".add").click(function(){
+        $("#buy_number").val(parseFloat(parseFloat($("#buy_number").val()) + 0.01).toFixed(2))
+    })
+
     $('.minus').click(function () {
-        var n = parseFloat($('#buy_number').attr('data-n'))
-        var pct = parseInt($('#buy_number').attr('data-pct'))
-        $('#buy_number').attr('data-pct', pct - 1)
-        $('#buy_number').val((n * (1 + (pct - 1) * 0.01)).toFixed(2))
-    });
-    // 出售
-    $('.add1').click(function () {
-        var n = parseFloat($('#sell_number').attr('data-n'))
-        var pct = parseInt($('#sell_number').attr('data-pct'))
-        $('#sell_number').attr('data-pct', pct + 1)
-        $('#sell_number').val((n * (1 + (pct + 1) * 0.01)).toFixed(2))
-    });
+        $("#buy_number").val(parseFloat(parseFloat($("#buy_number").val()) - 0.01).toFixed(2))
+    })
+
+    $(".add1").click(function(){
+        $("#sell_number").val(parseFloat(parseFloat($("#sell_number").val()) + 0.01).toFixed(2))
+    })
+
     $('.minus1').click(function () {
-        var n = parseFloat($('#sell_number').attr('data-n'))
-        var pct = parseInt($('#sell_number').attr('data-pct'))
-        $('#sell_number').attr('data-pct', pct - 1)
-        $('#sell_number').val((n * (1 + (pct - 1) * 0.01)).toFixed(2))
-    });
+        $("#sell_number").val(parseFloat(parseFloat($("#sell_number").val()) - 0.01).toFixed(2))
+    })
 
     function submit(type){
         if(type == 'buy'){

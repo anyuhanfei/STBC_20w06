@@ -96,6 +96,12 @@ class Log extends Admin{
         $this->many_assign(['list'=> $list, 'user_identity'=> $user_identity, 'coin_type'=> $coin_type, 'fund_type'=> $fund_type, 'start_time'=> $start_time, 'end_time'=> $end_time]);
         // 操作集
         View::assign('fund_type_text', LogUserFund::fund_type_text());
+        //今日释放
+        $t = LogUserFund::where('fund_type', '静态收益')->whereTime('insert_time', 'today')->sum('number');
+        //总释放
+        $a = LogUserFund::where('fund_type', '静态收益')->sum('number');
+        View::assign('t', $t);
+        View::assign('a', $a);
         return View::fetch();
     }
 
