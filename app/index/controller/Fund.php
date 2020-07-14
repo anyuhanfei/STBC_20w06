@@ -238,7 +238,7 @@ class Fund extends Index{
                                     $fan_level = $top->level;
                                 }
                                 if($yield_earnings > 0){
-                                    LogUserFund::create_data($user_id, $yield_earnings, 'stbc', '总业绩奖', '总业绩奖');
+                                    LogUserFund::create_data($top_id, $yield_earnings, 'stbc', '总业绩奖', '总业绩奖');
                                 }
                             }
                         }else{
